@@ -65,8 +65,10 @@
     <Compile Include="Engine Code\Interfaces\IKeyboardInput.cs" />
     <Compile Include="Engine Code\Interfaces\IMouseInput.cs" />
     <Compile Include="Engine Code\Interfaces\IInputPublisher.cs" />
+    <Compile Include="Engine Code\Managers\AnimationManager.cs" />
     <Compile Include="Engine Code\Managers\CollisionManager.cs" />
-    <Compile Include="Engine Code\Entities\Ball.cs" />
+    <Compile Include="Game Code\AnimationModel.cs" />
+    <Compile Include="Game Code\Game Entities\Sam.cs" />
     <Compile Include="Engine Code\Entities\Entity.cs" />
     <Compile Include="Engine Code\Managers\EntityManager.cs" />
     <Compile Include="Engine Code\Interfaces\IEntity.cs" />
@@ -78,10 +80,11 @@
     <Compile Include="Engine Code\Interfaces\ISceneManager.cs" />
     <Compile Include="Game Code\Kernel.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnEntityTerminationEventArgs.cs" />
-    <Compile Include="Engine Code\Entities\Paddle.cs" />
-    <Compile Include="Engine Code\Entities\PongEntity.cs" />
+    <Compile Include="Game Code\Game Entities\Paddle.cs" />
+    <Compile Include="Game Code\Game Entities\GameEntity.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnInputEventArgs.cs" />
     <Compile Include="Game Code\Program.cs" />
+    <Compile Include="Game Code\GameContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine Code\Managers\SceneManager.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnKeyReleasedEventArgs.cs" />
@@ -100,7 +103,7 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Engine Code\Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>

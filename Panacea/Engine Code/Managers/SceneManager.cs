@@ -70,11 +70,11 @@ namespace Panacea.Managers
             // ITERATE through the 'sceneGraphCopy':
             foreach (IEntity entity in sceneGraph)
             {
-                // IF the object in the List is a 'Ball':
-                if (entity is Ball)
+                // IF the object in the List is a 'Sam':
+                if (entity is Sam)
                 {
                     // MOVE the ball by it's X and Y speed:
-                    (entity as Ball).update();
+                    (entity as Sam).update();
                 }
 
                 // IF the current Object is a Paddle:

@@ -78,8 +78,8 @@ namespace Panacea
             cManager = new CollisionManager();
             iManager = new InputManager();
 
-            // REQUEST a new 'Ball' object from the EntityManager, and pass it to the SceneManager:
-            sManager.spawn(eManager.createEntity<Ball>());
+            // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
+            sManager.spawn(eManager.createEntity<Sam>());
             // REQUEST two new 'Paddle' objects from the EntityManager, and pass it to the SceneManager:
             sManager.spawn(eManager.createEntity<Paddle>());
             sManager.spawn(eManager.createEntity<Paddle>());
@@ -104,13 +104,13 @@ namespace Panacea
             // ITERATE through the SceneGraph:
             for (int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
             {
-                // IF the object in the SceneGraph is a 'Ball', call its 'Serve()' method:
-                if ((sManager as SceneManager).SceneGraph[i] is Ball)
+                // IF the object in the SceneGraph is a 'Sam', call its 'Serve()' method:
+                if ((sManager as SceneManager).SceneGraph[i] is Sam)
                 { 
-                    // SERVE the 'Ball' passing in the screenWidth and screenHeight:
-                    ((sManager as SceneManager).SceneGraph[i] as Ball).Serve();
-                    // SUBSCRIBE to the event that is published in the Ball:
-                    ((sManager as SceneManager).SceneGraph[i] as Ball).OnEntityTermination += OnEntityTermination;
+                    // SERVE the 'Sam' passing in the screenWidth and screenHeight:
+                    ((sManager as SceneManager).SceneGraph[i] as Sam).Serve();
+                    // SUBSCRIBE to the event that is published in the Sam:
+                    ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
                 }
             }
 
@@ -122,14 +122,14 @@ namespace Panacea
         }
 
         /// <summary>
-        /// Event handler for the event OnEntityTermination, fired from the Ball class. This will be triggered each time a Ball goes out of play (touches the right or left wall).
+        /// Event handler for the event OnEntityTermination, fired from the Sam class. This will be triggered each time a Sam goes out of play (touches the right or left wall).
         /// </summary>
         /// <param name="sender">The object sending the event.</param>
         /// <param name="eventInformation">Details about the event.</param>
         private void OnEntityTermination(object sender, OnEntityTerminationEventArgs eventInformation)
         {
-            // UNSUBSCRIBE from the event published by the Ball about to be terminated:
-            (sender as Ball).OnEntityTermination -= OnEntityTermination;
+            // UNSUBSCRIBE from the event published by the Sam about to be terminated:
+            (sender as Sam).OnEntityTermination -= OnEntityTermination;
             // REMOVE the entity from the Collision Manager:
             cManager.removeCollidable(eventInformation.EntityUName, eventInformation.EntityUID);
             // DESPAWN the entity from the Scene Manager:
@@ -137,17 +137,17 @@ namespace Panacea
             // DESTROY the entity in the Entity Manager:
             eManager.destroyEntity(eventInformation.EntityUName, eventInformation.EntityUID);
 
-            // CREATE a new 'Ball' object with the EntityManager:
-            IEntity newBall = eManager.createEntity<Ball>();
+            // CREATE a new 'Sam' object with the EntityManager:
+            IEntity newBall = eManager.createEntity<Sam>();
             // SPAWN the entity into the SceneGraph:
             sManager.spawn(newBall);
             // ADD the entity to the CollisionManager:
             cManager.addCollidable((newBall as ICollidable));
             // SUBSCIRBE to the termination event that newBall publishes:
-            (newBall as Ball).OnEntityTermination += OnEntityTermination;
+            (newBall as Sam).OnEntityTermination += OnEntityTermination;
 
-            // SERVE the new Ball:
-            (newBall as Ball).Serve();
+            // SERVE the new Sam:
+            (newBall as Sam).Serve();
         }
         
         /// <summary>
@@ -197,8 +197,8 @@ namespace Panacea
             // DRAW the Entities:
             for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
             {
-                // DRAW all objects of type 'PongEntity' in the 'entityPool' List.
-                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as PongEntity).EntityTexture, ((sManager as SceneManager).SceneGraph[i] as PongEntity).EntityLocn, Color.AntiqueWhite);
+                // DRAW all objects of type 'GameEntity' in the 'entityPool' List.
+                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn, Color.AntiqueWhite);
                 //Console.WriteLine("My name is: " + sManager.SceneGraph[i].UName + " and my ID is: " + sManager.SceneGraph[i].UID);
             }
             //

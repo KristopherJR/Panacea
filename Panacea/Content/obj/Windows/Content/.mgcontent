@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/Arial20.spritefont</File>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_down.png</File>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_left.png</File>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_right.png</File>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_up.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File>AdobeMingStd-Light20.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
