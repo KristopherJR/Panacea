@@ -1,0 +1,11 @@
+FINAL VERSION SUMMARY: Version 0.1, 13-04-2021
+
+AUTHORS: 18008890 & Marc Price
+
+This state of the program is the inital version of the project.
+
+https://github.com/KristopherJR/Panacea
+
+PATCH NOTES:
+
+- Renaming Pong Game Engine project to create Panacea using the previously developed engine.
