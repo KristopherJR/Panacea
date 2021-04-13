@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panacea", "COMP2451Project\Panacea.csproj", "{64FB38AE-F8D9-4513-8FD8-1028BF541D31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panacea", "Panacea\Panacea.csproj", "{64FB38AE-F8D9-4513-8FD8-1028BF541D31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D8AB7AE3-E8AE-4252-BFD0-1734FD0523A9}
+		SolutionGuid = {2EC8EC19-A66A-43BC-9D56-595DB7045752}
 	EndGlobalSection
 EndGlobal

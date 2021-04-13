@@ -9,11 +9,26 @@
     <ProjectGuid>{64FB38AE-F8D9-4513-8FD8-1028BF541D31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>COMP2451Project</RootNamespace>
-    <AssemblyName>COMP2451Project</AssemblyName>
+    <RootNamespace>Panacea</RootNamespace>
+    <AssemblyName>Panacea</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -41,35 +56,35 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="InputClasses\KeyboardInput.cs" />
-    <Compile Include="InputClasses\MouseInput.cs" />
-    <Compile Include="Interfaces\ICollidable.cs" />
-    <Compile Include="Interfaces\ICollisionResponder.cs" />
-    <Compile Include="Interfaces\IInput.cs" />
-    <Compile Include="Interfaces\IInputListener.cs" />
-    <Compile Include="Interfaces\IKeyboardInput.cs" />
-    <Compile Include="Interfaces\IMouseInput.cs" />
-    <Compile Include="Interfaces\IInputPublisher.cs" />
-    <Compile Include="Managers\CollisionManager.cs" />
-    <Compile Include="Entities\Ball.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Managers\EntityManager.cs" />
-    <Compile Include="Interfaces\IEntity.cs" />
-    <Compile Include="Interfaces\ICollisionManager.cs" />
-    <Compile Include="Interfaces\IEntityManager.cs" />
-    <Compile Include="InputClasses\Input.cs" />
-    <Compile Include="Interfaces\IInputManager.cs" />
-    <Compile Include="Managers\InputManager.cs" />
-    <Compile Include="Interfaces\ISceneManager.cs" />
-    <Compile Include="Kernel.cs" />
-    <Compile Include="UserEventArgs\OnEntityTerminationEventArgs.cs" />
-    <Compile Include="Entities\Paddle.cs" />
-    <Compile Include="Entities\PongEntity.cs" />
-    <Compile Include="UserEventArgs\OnInputEventArgs.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Engine Code\InputClasses\KeyboardInput.cs" />
+    <Compile Include="Engine Code\InputClasses\MouseInput.cs" />
+    <Compile Include="Engine Code\Interfaces\ICollidable.cs" />
+    <Compile Include="Engine Code\Interfaces\ICollisionResponder.cs" />
+    <Compile Include="Engine Code\Interfaces\IInput.cs" />
+    <Compile Include="Engine Code\Interfaces\IInputListener.cs" />
+    <Compile Include="Engine Code\Interfaces\IKeyboardInput.cs" />
+    <Compile Include="Engine Code\Interfaces\IMouseInput.cs" />
+    <Compile Include="Engine Code\Interfaces\IInputPublisher.cs" />
+    <Compile Include="Engine Code\Managers\CollisionManager.cs" />
+    <Compile Include="Engine Code\Entities\Ball.cs" />
+    <Compile Include="Engine Code\Entities\Entity.cs" />
+    <Compile Include="Engine Code\Managers\EntityManager.cs" />
+    <Compile Include="Engine Code\Interfaces\IEntity.cs" />
+    <Compile Include="Engine Code\Interfaces\ICollisionManager.cs" />
+    <Compile Include="Engine Code\Interfaces\IEntityManager.cs" />
+    <Compile Include="Engine Code\InputClasses\Input.cs" />
+    <Compile Include="Engine Code\Interfaces\IInputManager.cs" />
+    <Compile Include="Engine Code\Managers\InputManager.cs" />
+    <Compile Include="Engine Code\Interfaces\ISceneManager.cs" />
+    <Compile Include="Game Code\Kernel.cs" />
+    <Compile Include="Engine Code\UserEventArgs\OnEntityTerminationEventArgs.cs" />
+    <Compile Include="Engine Code\Entities\Paddle.cs" />
+    <Compile Include="Engine Code\Entities\PongEntity.cs" />
+    <Compile Include="Engine Code\UserEventArgs\OnInputEventArgs.cs" />
+    <Compile Include="Game Code\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Managers\SceneManager.cs" />
-    <Compile Include="UserEventArgs\OnKeyReleasedEventArgs.cs" />
+    <Compile Include="Engine Code\Managers\SceneManager.cs" />
+    <Compile Include="Engine Code\UserEventArgs\OnKeyReleasedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -85,11 +100,17 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Engine Code\Content\Content.mgcb" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
