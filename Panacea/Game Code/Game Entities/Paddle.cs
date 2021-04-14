@@ -15,8 +15,6 @@ namespace Panacea
     public class Paddle : GameEntity, ICollidable, ICollisionResponder, IInputListener
     {
         #region FIELDS
-        // DECLARE a Texture2D, call it 'paddleTexture':
-        private Texture2D paddleTexture;
         // DECLARE an array of Keys[] called keysOfInterest. This will contain only the keys that we need to know about being pressed:
         private Keys[] keysOfInterest = { Keys.W, Keys.S, Keys.Up, Keys.Down };
         #endregion

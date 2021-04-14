@@ -18,12 +18,10 @@ namespace Panacea
         #endregion
         #region PROPERTIES
         #endregion
-
-
         public GameContent(ContentManager cm)
         {
             //load images
-            ImgSam = cm.Load<Texture2D>("assets/sam/walking/walking_down");
+            ImgSam = cm.Load<Texture2D>("assets/sam/walking/down/1");
 
             //load fonts
             font = cm.Load<SpriteFont>("AdobeMingStd-Light20");

@@ -1,6 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "D:/Documents/Programming/Panacea/Panacea/Content/Arial20.spritefont","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/AdobeMingStd-Light20.xnb","FontDescriptionProcessor","SpriteFontContent",2021,37905,0.3246875
-"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_down.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/walking_down.xnb","TextureProcessor","Texture2DContent",882,5629,0.0199929
-"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_left.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/walking_left.xnb","TextureProcessor","Texture2DContent",781,5541,0.0019999
-"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_right.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/walking_right.xnb","TextureProcessor","Texture2DContent",738,5453,0.0019991
-"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_up.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/walking_up.xnb","TextureProcessor","Texture2DContent",797,5881,0.0019997
+"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/down/1.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/down/1.xnb","TextureProcessor","Texture2DContent",545,1405,0.1399636

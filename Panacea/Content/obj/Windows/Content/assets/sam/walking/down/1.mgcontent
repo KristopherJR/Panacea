@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/walking_right.png</SourceFile>
-  <SourceTime>2021-04-13T19:07:05.9232125+01:00</SourceTime>
-  <DestFile>D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/assets/sam/walking/walking_right.xnb</DestFile>
-  <DestTime>2021-04-14T10:41:54.3560977+01:00</DestTime>
+  <SourceFile>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/down/1.png</SourceFile>
+  <SourceTime>2021-04-13T18:31:18.3417074+01:00</SourceTime>
+  <DestFile>D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/assets/sam/walking/down/1.xnb</DestFile>
+  <DestTime>2021-04-14T11:30:07.7345519+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T16:35:54+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

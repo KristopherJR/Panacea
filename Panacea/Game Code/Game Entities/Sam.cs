@@ -12,13 +12,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Panacea
 {
-    public class Sam : GameEntity, ICollidable, ICollisionResponder
+    public class Sam : GameEntity, ICollidable, ICollisionResponder, IInputListener
     {
         #region FIELDS
         // DECLARE a float, call it 'mSpeed':
         private float moveSpeed;
         // DECLARE an event, call it 'OnEntityTermination':
         public event EventHandler<OnEntityTerminationEventArgs> OnEntityTermination;
+        // DECLARE an array of Keys[] called keysOfInterest. This will contain only the keys that we need to know about being pressed:
+        private Keys[] keysOfInterest = { Keys.W, Keys.A, Keys.S, Keys.D };
         #endregion
 
         #region PROPERTIES
@@ -132,5 +134,67 @@ namespace Panacea
             }
         }
         #endregion
+        #region IMPLEMENTATION OF IInputListener
+        /// <summary>
+        /// Event Handler for the event OnNewInput, fired from the InputManager. This will be triggered when a new input occurs. Method from Marc Price, Week 18 Input slides on BlackBoard.
+        /// </summary>
+        /// <param name="sender">The object sending the event.</param>
+        /// <param name="eventInformation">Information about the input event.</param>
+        public virtual void OnNewInput(object sender, OnInputEventArgs eventInformation)
+        {
+            //Respond to new input:
+            switch (eventInformation.KeyInput)
+            {
+                case Keys.W:
+                    this.Velocity = new Vector2(0,-5);
+                    break;
+                case Keys.A:
+                    this.Velocity = new Vector2(-5,0);
+                    break;
+                case Keys.S:
+                    this.Velocity = new Vector2(0,5);
+                    break;
+                case Keys.D:
+                    this.Velocity = new Vector2(5,0);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Event Handler for the event OnKeyReleased, fired from the InputManager. This will be triggered when a key is released.
+        /// </summary>
+        /// <param name="sender">The object sending the event.</param>
+        /// <param name="eventInformation">Information about the input event.</param>
+        public virtual void OnKeyReleased(object sender, OnKeyReleasedEventArgs eventInformation)
+        {
+            //Respond to new input:
+            switch (eventInformation.KeyReleased)
+            {
+                case Keys.W:
+                    this.Velocity = new Vector2(0,0);
+                    break;
+                case Keys.A:
+                    this.Velocity = new Vector2(0,0);
+                    break;
+                case Keys.S:
+                    this.Velocity = new Vector2(0,0);
+                    break;
+                case Keys.D:
+                    this.Velocity = new Vector2(0,0);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Used to return the KeysOfInterst contained in the Listener.
+        /// </summary>
+        /// <returns>The array of KeysOfInterest.</returns>
+        public Keys[] getKOI()
+        {
+            // return keysOfInterest:
+            return keysOfInterest;
+        }
+        #endregion
+
     }
 }

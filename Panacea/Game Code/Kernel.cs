@@ -127,26 +127,6 @@ namespace Panacea
         {
             // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
             sManager.spawn(eManager.createEntity<Sam>());
-            // REQUEST two new 'Paddle' objects from the EntityManager, and pass it to the SceneManager:
-            sManager.spawn(eManager.createEntity<Paddle>());
-            sManager.spawn(eManager.createEntity<Paddle>());
-
-            // CHECK if the SceneGraph at index '1' is a 'Paddle' object:
-            if ((sManager as SceneManager).SceneGraph[1] is Paddle)
-            {
-                // SET the location of the Player One paddle to the left of the screen and in the centre:
-                ((sManager as SceneManager).SceneGraph[1] as Paddle).EntityLocn = new Vector2(50, (SCREEN_HEIGHT / 2) - (((sManager as SceneManager).SceneGraph[1] as Paddle).EntityTexture.Height) / 2);
-                // SUBSCRIBE the paddle to listen for input events and key release events:
-                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[1] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[1] as Paddle).OnKeyReleased);
-            }
-            // CHECK if the SceneGraph at index '2' is a 'Paddle' object:
-            if ((sManager as SceneManager).SceneGraph[2] is Paddle)
-            {
-                // SET the location of the Player Two paddle to the right of the screen and in the centre:
-                ((sManager as SceneManager).SceneGraph[2] as Paddle).EntityLocn = new Vector2(1500, (SCREEN_HEIGHT / 2) - (((sManager as SceneManager).SceneGraph[2] as Paddle).EntityTexture.Height) / 2);
-                // SUBSCRIBE the paddle to listen for input events and key release events:
-                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[2] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[2] as Paddle).OnKeyReleased);
-            }
 
             // ITERATE through the SceneGraph:
             for (int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
@@ -158,6 +138,8 @@ namespace Panacea
                     ((sManager as SceneManager).SceneGraph[i] as Sam).Serve();
                     // SUBSCRIBE to the event that is published in the Sam:
                     ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
+                    // SUBSCRIBE the paddle to listen for input events and key release events:
+                    (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[0] as IInputListener), ((sManager as SceneManager).SceneGraph[0] as Sam).OnNewInput, ((sManager as SceneManager).SceneGraph[0] as Sam).OnKeyReleased);
                 }
             }
 
