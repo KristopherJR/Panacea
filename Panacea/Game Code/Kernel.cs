@@ -170,9 +170,12 @@ namespace Panacea
             for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
             {
                 // DRAW all objects of type 'GameEntity' in the 'entityPool' List.
-                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn, Color.AntiqueWhite);
-                
+                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, 
+                                ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn,
+                                ((sManager as SceneManager).SceneGraph[i] as GameEntity).TextureSourceRectangle, // Tells the program where the texture is located on the sprite sheet
+                                Color.White);  
             }
+
             spriteBatch.End();
 
             base.Draw(gameTime);

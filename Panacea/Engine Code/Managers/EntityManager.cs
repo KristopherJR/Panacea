@@ -110,35 +110,6 @@ namespace Panacea.Managers
                 // SET the entityPool name to "Sam" plus the 'tempCounter':
                 e.UName = ("Sam" + tempCounter);
             }
-
-            // CHECK if the IEntity passed in is a 'Paddle' object:
-            if (e is Paddle)
-            {
-                // STEP-THROUGH the 'entityPool' List for each 'Paddle':
-                for (int i = 0; i < entityPool.Count; i++)
-                {
-                    if (entityPool[i] is Paddle)
-                    {
-                        // INCREASE the 'tempCounter' for each 'Paddle':
-                        tempCounter++;
-                    }
-                }
-                // STEP-THROUGH the 'entityPool' List again for each 'Paddle':
-                for (int i = 0; i < entityPool.Count; i++)
-                {
-                    if (entityPool[i] is Paddle)
-                    {
-                        // CHECK that the name isn't already being used:
-                        if (entityPool[i].UName == ("Paddle" + tempCounter))
-                        {
-                            // IF the name is being used, increase the counter again:
-                            tempCounter++;
-                        }
-                    }
-                }
-                // SET the entityPool name to "Paddle" plus the 'tempCounter':
-                e.UName = ("Paddle" + tempCounter);
-            }
         }
     }
 }

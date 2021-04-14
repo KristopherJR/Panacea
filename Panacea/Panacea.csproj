@@ -65,9 +65,7 @@
     <Compile Include="Engine Code\Interfaces\IKeyboardInput.cs" />
     <Compile Include="Engine Code\Interfaces\IMouseInput.cs" />
     <Compile Include="Engine Code\Interfaces\IInputPublisher.cs" />
-    <Compile Include="Engine Code\Managers\AnimationManager.cs" />
     <Compile Include="Engine Code\Managers\CollisionManager.cs" />
-    <Compile Include="Game Code\AnimationModel.cs" />
     <Compile Include="Game Code\Game Entities\Sam.cs" />
     <Compile Include="Engine Code\Entities\Entity.cs" />
     <Compile Include="Engine Code\Managers\EntityManager.cs" />
@@ -80,7 +78,6 @@
     <Compile Include="Engine Code\Interfaces\ISceneManager.cs" />
     <Compile Include="Game Code\Kernel.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnEntityTerminationEventArgs.cs" />
-    <Compile Include="Game Code\Game Entities\Paddle.cs" />
     <Compile Include="Game Code\Game Entities\GameEntity.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnInputEventArgs.cs" />
     <Compile Include="Game Code\Program.cs" />
@@ -114,6 +111,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

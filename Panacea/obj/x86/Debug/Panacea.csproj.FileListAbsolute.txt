@@ -1,3 +1,4 @@
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\sam_spritesheet.xnb
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Panacea.pdb
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\MonoGame.Framework.dll
@@ -23,5 +24,3 @@ D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CoreCompil
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CopyComplete
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.pdb
-D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\AdobeMingStd-Light20.xnb
-D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\assets\sam\walking\down\1.xnb

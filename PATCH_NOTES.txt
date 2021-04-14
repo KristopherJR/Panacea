@@ -1,4 +1,4 @@
-VERSION: 0.1.2, 14-04-2021
+VERSION: 0.1.3, 14-04-2021
 
 AUTHORS: 18008890 & Marc Price
 
@@ -8,6 +8,5 @@ https://github.com/KristopherJR/Panacea
 
 PATCH NOTES:
 
-- Remodelled the Paddle classes movement into Sams.
-- Created the GameContent class to store all textures, sounds and fonts. 
-- Created a new method in Kernel called "SpawnObjects()", which is called from LoadContent().
+- Removed TexturePacker for now
+- Program now uses a SpriteSheet for the character, and the specific texture is specified using a SourceRectangle

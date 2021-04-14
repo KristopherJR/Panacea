@@ -76,13 +76,6 @@ namespace Panacea.Managers
                     // MOVE the ball by it's X and Y speed:
                     (entity as Sam).update();
                 }
-
-                // IF the current Object is a Paddle:
-                if (entity is Paddle)
-                {
-                    // MOVE the paddle:
-                    (entity as Paddle).Update();
-                }
             }
         }
 

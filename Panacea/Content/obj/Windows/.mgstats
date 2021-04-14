@@ -1,3 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Documents/Programming/Panacea/Panacea/Content/Arial20.spritefont","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/AdobeMingStd-Light20.xnb","FontDescriptionProcessor","SpriteFontContent",2021,37905,0.3608905
-"D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/down/1.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/assets/sam/walking/down/1.xnb","TextureProcessor","Texture2DContent",545,1405,0.0179939
+"D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/sam_spritesheet.xnb","TextureProcessor","Texture2DContent",10873,278613,0.1648122

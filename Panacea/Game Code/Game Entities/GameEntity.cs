@@ -17,6 +17,8 @@ namespace Panacea
         private Texture2D entityTexture;
         // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the GameEntities Location:
         private Vector2 entityLocn;
+        // DECLARE a Rectangle to store the co-ordinates of the texture on the spritesheet, as well as the size of the texture. Call it 'textureSourceRectangle':
+        private Rectangle textureSourceRectangle;
         // DECLARE a reference to a Vector2 object, call it "velocity". This is used to represent velocity values of PongEntities:
         protected Vector2 velocity;
         #endregion
@@ -37,6 +39,12 @@ namespace Panacea
         {
             get { return entityLocn; } // get method
             set { entityLocn = value; } // set method
+        }
+
+        public Rectangle TextureSourceRectangle
+        {
+            get { return textureSourceRectangle; } // get method
+            set { textureSourceRectangle = value; } // set method
         }
         public Vector2 Velocity
         {

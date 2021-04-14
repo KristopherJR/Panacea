@@ -14,17 +14,10 @@ namespace Panacea
     {
         #region FIELDS
         public static Texture2D ImgSam;
-        private SpriteFont font;
-        #endregion
-        #region PROPERTIES
         #endregion
         public GameContent(ContentManager cm)
         {
-            //load images
-            ImgSam = cm.Load<Texture2D>("assets/sam/walking/down/1");
-
-            //load fonts
-            font = cm.Load<SpriteFont>("AdobeMingStd-Light20");
+            ImgSam = cm.Load<Texture2D>("sam_spritesheet");
         }
     }
 }

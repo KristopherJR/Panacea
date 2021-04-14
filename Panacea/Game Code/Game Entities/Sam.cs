@@ -15,7 +15,7 @@ namespace Panacea
     public class Sam : GameEntity, ICollidable, ICollisionResponder, IInputListener
     {
         #region FIELDS
-        // DECLARE a float, call it 'mSpeed':
+        // DECLARE a float, call it 'moveSpeed':
         private float moveSpeed;
         // DECLARE an event, call it 'OnEntityTermination':
         public event EventHandler<OnEntityTerminationEventArgs> OnEntityTermination;
@@ -33,6 +33,8 @@ namespace Panacea
         {
             // SET the 'EntityTexture' of 'Sam' to the passed in parameter:
             this.EntityTexture = GameContent.ImgSam;
+            // SET the TextureSourceRectangle in the parent class to the base idle state:
+            this.TextureSourceRectangle = new Rectangle(1, 6, 15, 22);
             // INITIALIZE mSpeed to '8':
             this.moveSpeed = 8;
         }
@@ -111,15 +113,6 @@ namespace Panacea
         /// <param name="collidee">The object that this object collided into.</param>
         public void CheckAndRespond(ICollidable collidee)
         {
-            if (collidee is Paddle)
-            {
-                // CHECK if this ball has hit a Paddle:
-                if (GameEntity.hasCollided(this, collidee))
-                {
-                    // BOUNCE the ball off the Paddle:
-                   // this.Velocity = new Vector2((-this.Velocity.X) * SPIN, (this.Velocity.Y) * SPIN);
-                }
-            }
             // IF this ball has gone out of play:
             if(this.GoneOutOfPlay())
             {

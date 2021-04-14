@@ -4,11 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Documents/Programming/Panacea/Panacea/Content/Arial20.spritefont</File>
-    <File>D:/Documents/Programming/Panacea/Panacea/Content/assets/sam/walking/down/1.png</File>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>AdobeMingStd-Light20.spritefont</File>
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
