@@ -12,39 +12,21 @@ namespace Panacea
 {
     class GameContent
     {
+        #region FIELDS
+        public static Texture2D ImgSam;
+        private SpriteFont font;
+        #endregion
         #region PROPERTIES
-        public Texture2D imgSamWalkUp1 { get; set; }
-        public Texture2D imgSamWalkUp2 { get; set; }
-        public Texture2D imgSamWalkUp3 { get; set; }
-        public Texture2D imgSamWalkUp4 { get; set; }
-        public Texture2D imgSamWalkDown1 { get; set; }
-        public Texture2D imgSamWalkDown2 { get; set; }
-        public Texture2D imgSamWalkDown3 { get; set; }
-        public Texture2D imgSamWalkDown4 { get; set; }
-
-        public Texture2D imgPaddle { get; set; }
-        public Texture2D imgBall { get; set; }
-        public Texture2D imgPixel { get; set; }
-        public SpriteFont labelFont { get; set; }
         #endregion
 
 
-        public GameContent(ContentManager Content)
+        public GameContent(ContentManager cm)
         {
             //load images
-            imgBall = Content.Load<Texture2D>("Ball");
-            imgPixel = Content.Load<Texture2D>("Pixel");
-            imgPaddle = Content.Load<Texture2D>("Paddle");
-            imgBrick = Content.Load<Texture2D>("Brick");
+            ImgSam = cm.Load<Texture2D>("assets/sam/walking/walking_down");
 
-            //load sounds
-            startSound = Content.Load<SoundEffect>("StartSound");
-            brickSound = Content.Load<SoundEffect>("BrickSound");
-            paddleBounceSound = Content.Load<SoundEffect>("PaddleBounceSound");
-            wallBounceSound = Content.Load<SoundEffect>("WallBounceSound");
-            missSound = Content.Load<SoundEffect>("MissSound");
             //load fonts
-            labelFont = Content.Load<SpriteFont>("Arial20");
+            font = cm.Load<SpriteFont>("AdobeMingStd-Light20");
         }
     }
 }

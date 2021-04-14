@@ -32,7 +32,6 @@ namespace Panacea.Game_Code
             IsLooping = true;
 
             FrameSpeed = 0.2f;
-
         }
     }
 }

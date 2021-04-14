@@ -17,14 +17,13 @@ namespace Panacea
         #region FIELDS
         // DECLARE a public static Boolean, call it 'running':
         public static Boolean running;
-        // DECLARE a reference to a static Texture2D used to store the ball and paddle images. Call them 'ballTexture' and 'paddleTexture' respectively:
-        public static Texture2D ballTexture;
-        public static Texture2D paddleTexture;
 
         // DECLARE a GraphicsDeviceManager, call it 'graphics':
         private GraphicsDeviceManager graphics;
         // DECLARE a SpriteBatch, call it 'spriteBatch':
         private SpriteBatch spriteBatch;
+        // DECLARE an instance of GameContent, call it 'gameContent':
+        private GameContent gameContent;
 
         // DECLARE an EntityManager, call it 'eManager'. Store it as its interface IEntityManager:
         private IEntityManager eManager;
@@ -68,54 +67,11 @@ namespace Panacea
             // GET screenWidth:
             SCREEN_WIDTH = GraphicsDevice.Viewport.Width;
 
-            // ASSIGN the 'ballTexture' and 'paddleTexture' with their respected image files:
-            ballTexture = Content.Load<Texture2D>("square");
-            paddleTexture = Content.Load<Texture2D>("paddle");
-
             // INITIALIZE the Managers:
             eManager = new EntityManager();
             sManager = new SceneManager();
             cManager = new CollisionManager();
             iManager = new InputManager();
-
-            // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
-            sManager.spawn(eManager.createEntity<Sam>());
-            // REQUEST two new 'Paddle' objects from the EntityManager, and pass it to the SceneManager:
-            sManager.spawn(eManager.createEntity<Paddle>());
-            sManager.spawn(eManager.createEntity<Paddle>());
-
-            // CHECK if the SceneGraph at index '1' is a 'Paddle' object:
-            if((sManager as SceneManager).SceneGraph[1] is Paddle)
-            {
-                // SET the location of the Player One paddle to the left of the screen and in the centre:
-                ((sManager as SceneManager).SceneGraph[1] as Paddle).EntityLocn = new Vector2(50, (SCREEN_HEIGHT / 2) - (((sManager as SceneManager).SceneGraph[1] as Paddle).EntityTexture.Height) / 2);
-                // SUBSCRIBE the paddle to listen for input events and key release events:
-                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[1] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[1] as Paddle).OnKeyReleased);
-            }
-            // CHECK if the SceneGraph at index '2' is a 'Paddle' object:
-            if ((sManager as SceneManager).SceneGraph[2] is Paddle)
-            {
-                // SET the location of the Player Two paddle to the right of the screen and in the centre:
-                ((sManager as SceneManager).SceneGraph[2] as Paddle).EntityLocn = new Vector2(1500, (SCREEN_HEIGHT/2) - (((sManager as SceneManager).SceneGraph[2] as Paddle).EntityTexture.Height)/2);
-                // SUBSCRIBE the paddle to listen for input events and key release events:
-                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[2] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[2] as Paddle).OnKeyReleased);
-            }
-
-            // ITERATE through the SceneGraph:
-            for (int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
-            {
-                // IF the object in the SceneGraph is a 'Sam', call its 'Serve()' method:
-                if ((sManager as SceneManager).SceneGraph[i] is Sam)
-                { 
-                    // SERVE the 'Sam' passing in the screenWidth and screenHeight:
-                    ((sManager as SceneManager).SceneGraph[i] as Sam).Serve();
-                    // SUBSCRIBE to the event that is published in the Sam:
-                    ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
-                }
-            }
-
-            // POPULATE the CollisionManagers collidables List with objects from the Scene Graph:
-            cManager.populateCollidables((sManager as SceneManager).SceneGraph);
 
             base.Initialize();
             running = true;
@@ -156,8 +112,88 @@ namespace Panacea
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // CREATE a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            // INITIALIZE 'gameContent' passing in the ContentManager. This will load the game textures:
+            gameContent = new GameContent(Content);
+            // SPAWN the game objects:
+            this.SpawnObjects();
+        }
+
+        /// <summary>
+        /// SpawnObjects is used to spawn all game objects into the SceneGraph/EntityPool/CollisionMap. Called in Kernel from LoadContent().
+        /// </summary>
+        private void SpawnObjects()
+        {
+            // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
+            sManager.spawn(eManager.createEntity<Sam>());
+            // REQUEST two new 'Paddle' objects from the EntityManager, and pass it to the SceneManager:
+            sManager.spawn(eManager.createEntity<Paddle>());
+            sManager.spawn(eManager.createEntity<Paddle>());
+
+            // CHECK if the SceneGraph at index '1' is a 'Paddle' object:
+            if ((sManager as SceneManager).SceneGraph[1] is Paddle)
+            {
+                // SET the location of the Player One paddle to the left of the screen and in the centre:
+                ((sManager as SceneManager).SceneGraph[1] as Paddle).EntityLocn = new Vector2(50, (SCREEN_HEIGHT / 2) - (((sManager as SceneManager).SceneGraph[1] as Paddle).EntityTexture.Height) / 2);
+                // SUBSCRIBE the paddle to listen for input events and key release events:
+                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[1] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[1] as Paddle).OnKeyReleased);
+            }
+            // CHECK if the SceneGraph at index '2' is a 'Paddle' object:
+            if ((sManager as SceneManager).SceneGraph[2] is Paddle)
+            {
+                // SET the location of the Player Two paddle to the right of the screen and in the centre:
+                ((sManager as SceneManager).SceneGraph[2] as Paddle).EntityLocn = new Vector2(1500, (SCREEN_HEIGHT / 2) - (((sManager as SceneManager).SceneGraph[2] as Paddle).EntityTexture.Height) / 2);
+                // SUBSCRIBE the paddle to listen for input events and key release events:
+                (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[1] as IInputListener), ((sManager as SceneManager).SceneGraph[2] as Paddle).OnNewInput, ((sManager as SceneManager).SceneGraph[2] as Paddle).OnKeyReleased);
+            }
+
+            // ITERATE through the SceneGraph:
+            for (int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
+            {
+                // IF the object in the SceneGraph is a 'Sam', call its 'Serve()' method:
+                if ((sManager as SceneManager).SceneGraph[i] is Sam)
+                {
+                    // SERVE the 'Sam' passing in the screenWidth and screenHeight:
+                    ((sManager as SceneManager).SceneGraph[i] as Sam).Serve();
+                    // SUBSCRIBE to the event that is published in the Sam:
+                    ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
+                }
+            }
+
+            // POPULATE the CollisionManagers collidables List with objects from the Scene Graph:
+            cManager.populateCollidables((sManager as SceneManager).SceneGraph);
+        }
+        /// <summary>
+        /// Unloads game content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+        }
+
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            // DRAW the Entities:
+            for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
+            {
+                // DRAW all objects of type 'GameEntity' in the 'entityPool' List.
+                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn, Color.AntiqueWhite);
+                
+            }
+            spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         /// <summary>
@@ -180,31 +216,7 @@ namespace Panacea
                 iManager.update();
 
                 base.Update(gameTime);
-            } 
-        }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-            spriteBatch.Begin();
-
-            // DRAW the Entities:
-            for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
-            {
-                // DRAW all objects of type 'GameEntity' in the 'entityPool' List.
-                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn, Color.AntiqueWhite);
-                //Console.WriteLine("My name is: " + sManager.SceneGraph[i].UName + " and my ID is: " + sManager.SceneGraph[i].UID);
             }
-            //
-            spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

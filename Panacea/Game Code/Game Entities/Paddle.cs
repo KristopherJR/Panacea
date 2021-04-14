@@ -28,10 +28,8 @@ namespace Panacea
         /// </summary>
         public Paddle()
         {
-            // SET the 'paddleTexture' of 'Paddle' to the static texture contained in Kernel:
-            paddleTexture = Kernel.paddleTexture;
-            // SET 'EntityTexture' to 'paddleTexture':
-            this.EntityTexture = paddleTexture;
+            // SET the 'EntityTexture' of 'Sam' to the passed in parameter:
+            this.EntityTexture = GameContent.ImgSam;
         }
 
         /// <summary>

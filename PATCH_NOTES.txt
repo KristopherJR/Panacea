@@ -1,11 +1,8 @@
-FINAL VERSION SUMMARY: Version 0.1, 13-04-2021
+FINAL VERSION SUMMARY: Version 0.2, 14-04-2021
 
 AUTHORS: 18008890 & Marc Price
 
-This state of the program is the inital version of the project.
+Added a GameContent class to store all game textures, fonts and sounds. This is initialised in Kernel. Sprites can statically call textures
+in GameContent, this may be refactored to use Properties in later versions. Sam and Paddle now take Sams texture just to test.
 
 https://github.com/KristopherJR/Panacea
-
-PATCH NOTES:
-
-- Renaming Pong Game Engine project to create Panacea using the previously developed engine.

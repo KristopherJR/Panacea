@@ -15,12 +15,8 @@ namespace Panacea
     public class Sam : GameEntity, ICollidable, ICollisionResponder
     {
         #region FIELDS
-        // DECLARE a Texture2D, call it 'ballTexture':
-        private Texture2D ballTexture;
         // DECLARE a float, call it 'mSpeed':
-        private float mSpeed;
-        // DECLARE a Random, call it 'random':
-        private Random random;
+        private float moveSpeed;
         // DECLARE an event, call it 'OnEntityTermination':
         public event EventHandler<OnEntityTerminationEventArgs> OnEntityTermination;
         #endregion
@@ -33,14 +29,10 @@ namespace Panacea
         /// </summary>
         public Sam()
         {
-            // SET the 'ballTexture' of 'Sam' to the static texture contained in Kernel:
-            ballTexture = Kernel.ballTexture;
-            // SET the EntityTexture to 'ballTexture':
-            this.EntityTexture = ballTexture;
-            // INITIALIZE the RNG:
-            this.random = new Random();
+            // SET the 'EntityTexture' of 'Sam' to the passed in parameter:
+            this.EntityTexture = GameContent.ImgSam;
             // INITIALIZE mSpeed to '8':
-            this.mSpeed = 8;
+            this.moveSpeed = 8;
         }
 
         /// <summary>
@@ -105,22 +97,8 @@ namespace Panacea
                 //SET the Sam Object calling the method to the centre of the screen:
                 this.EntityLocn = new Vector2((Kernel.SCREEN_WIDTH / 2 - this.EntityTexture.Width / 2), (Kernel.SCREEN_HEIGHT / 2 - this.EntityTexture.Height / 2));
 
-                //GENERATE a random number used to send the ball in a random direction:
-                float rotation = (float)(Math.PI / 2 + (random.NextDouble() * (Math.PI / 1.5f) - Math.PI / 3));
-
-                //SET the XSpeed and YSpeed to a random number using 'rotation':
-                this.velocity.X = (float)Math.Sin(rotation);
-                this.velocity.Y = (float)Math.Cos(rotation);
-
-                //MAKE the ball have an equal (50/50) chance to launch left or right:
-                if (random.Next(1, 3) == 2) //random number which will always be 1 or 2.
-                {
-                    //INVERT the velocity:
-                    this.velocity = -this.velocity;
-                }
-
                 //MULTIPLY the velocity by the mSpeed:
-                velocity *= mSpeed;
+                velocity *= moveSpeed;
             }
         }
 
@@ -137,7 +115,7 @@ namespace Panacea
                 if (GameEntity.hasCollided(this, collidee))
                 {
                     // BOUNCE the ball off the Paddle:
-                    this.Velocity = new Vector2((-this.Velocity.X) * SPIN, (this.Velocity.Y) * SPIN);
+                   // this.Velocity = new Vector2((-this.Velocity.X) * SPIN, (this.Velocity.Y) * SPIN);
                 }
             }
             // IF this ball has gone out of play:

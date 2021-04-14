@@ -13,11 +13,9 @@ namespace Panacea
     public abstract class GameEntity : Entity
     {
         #region FIELDS
-        // DECLARE a public static float called "SPIN", set it to "1.05f". This is a value added to the velocity of a 'Sam' when it collides with a 'Paddle':
-        public static float SPIN = 1.05f;
         // DECLARE a reference to a Texture2D object, call it "entityTexture". This will contain the .PNG graphic file:
         private Texture2D entityTexture;
-        // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the PongEntities Location:
+        // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the GameEntities Location:
         private Vector2 entityLocn;
         // DECLARE a reference to a Vector2 object, call it "velocity". This is used to represent velocity values of PongEntities:
         protected Vector2 velocity;

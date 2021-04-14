@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Panacea.Game_Code;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,17 @@ namespace Panacea.Engine_Code.Managers
             animationModel = am;
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(animationModel.Texture,
+                             Position,
+                             new Rectangle(animationModel.CurrentFrame * animationModel.FrameWidth,
+                                           0,
+                                           animationModel.FrameWidth,
+                                           animationModel.FrameHeight),
+                             Color.White);
+        }
+
         public void Play(AnimationModel am)
         {
             if (animationModel == am)
@@ -31,6 +43,28 @@ namespace Panacea.Engine_Code.Managers
             animationModel = am;
             animationModel.CurrentFrame = 0;
             timer = 0;
+        }
+
+        public void Stop()
+        {
+            timer = 0f;
+            animationModel.CurrentFrame = 0;
+        }
+
+        public void update(GameTime gameTime)
+        {
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if(timer > animationModel.FrameSpeed)
+            {
+                timer = 0f;
+                animationModel.CurrentFrame++;
+
+                if(animationModel.CurrentFrame > animationModel.FrameCount)
+                {
+                    animationModel.CurrentFrame = 0;
+                }
+            }
         }
     }
 }

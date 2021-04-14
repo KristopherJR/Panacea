@@ -1,5 +1,3 @@
-D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\paddle.xnb
-D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\square.xnb
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Panacea.pdb
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\MonoGame.Framework.dll
@@ -25,3 +23,8 @@ D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CoreCompil
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CopyComplete
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.pdb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\assets\sam\walking\walking_down.xnb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\assets\sam\walking\walking_left.xnb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\assets\sam\walking\walking_right.xnb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\assets\sam\walking\walking_up.xnb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\AdobeMingStd-Light20.xnb
