@@ -7,18 +7,17 @@ using Panacea.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Panacea.Game_Code.Game_Entities;
 
 namespace Panacea
 {
     public abstract class GameEntity : Entity
     {
         #region FIELDS
-        // DECLARE a reference to a Texture2D object, call it "entityTexture". This will contain the .PNG graphic file:
-        private Texture2D entityTexture;
+        // DECLARE a reference to a Sprite object, call it "entitySprite". This is used to store graphical information about the entity as a Sprite:
+        private Sprite entitySprite;
         // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the GameEntities Location:
         private Vector2 entityLocn;
-        // DECLARE a Rectangle to store the co-ordinates of the texture on the spritesheet, as well as the size of the texture. Call it 'textureSourceRectangle':
-        private Rectangle textureSourceRectangle;
         // DECLARE a reference to a Vector2 object, call it "velocity". This is used to represent velocity values of PongEntities:
         protected Vector2 velocity;
         #endregion
@@ -26,13 +25,13 @@ namespace Panacea
         #region PROPERTIES
         public Rectangle HitBox // property
         {
-            get { return new Rectangle((int)this.entityLocn.X, (int)this.EntityLocn.Y, this.entityTexture.Width, this.entityTexture.Height); } //HitBox returns an appropriately sized hit box for the entity calling it, based on the entityPool location and size at the time of calling.
+            get { return new Rectangle((int)this.entityLocn.X, (int)this.EntityLocn.Y, entitySprite.SpriteTexture.Width, entitySprite.SpriteTexture.Height); } //HitBox returns an appropriately sized hit box for the entity calling it, based on the entityPool location and size at the time of calling.
         }
 
-        public Texture2D EntityTexture // property
+        public Sprite EntitySprite // property
         {
-            get { return entityTexture; } // get method
-            set { entityTexture = value; } // set method
+            get { return entitySprite; } // get method
+            set { entitySprite = value; } // set method
         }
 
         public Vector2 EntityLocn
@@ -41,11 +40,6 @@ namespace Panacea
             set { entityLocn = value; } // set method
         }
 
-        public Rectangle TextureSourceRectangle
-        {
-            get { return textureSourceRectangle; } // get method
-            set { textureSourceRectangle = value; } // set method
-        }
         public Vector2 Velocity
         {
             get { return velocity; } // get method
@@ -60,6 +54,15 @@ namespace Panacea
         {
             // INITALIZE entityLocn to default 0,0:
             this.entityLocn = new Vector2(0,0);
+        }
+
+        /// <summary>
+        /// Called from Kernel, tells the GameEntity to draw itself onto the spriteBatch parameter passed in.
+        /// </summary>
+        /// <param name="spriteBatch">The games SpriteBatch.</param>
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            entitySprite.Draw(spriteBatch, entityLocn);
         }
 
         /// <summary>

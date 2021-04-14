@@ -15,6 +15,11 @@ namespace Panacea
     public class Sam : GameEntity, ICollidable, ICollisionResponder, IInputListener
     {
         #region FIELDS
+        // DECLARE a const int for the 
+        private const int SAM_TEXTURE_X = 1;
+        private const int SAM_TEXTURE_Y = 6;
+        private const int SAM_TEXTURE_WIDTH = 15;
+        private const int SAM_TEXTURE_HEIGHT = 22;
         // DECLARE a float, call it 'moveSpeed':
         private float moveSpeed;
         // DECLARE an event, call it 'OnEntityTermination':
@@ -31,12 +36,16 @@ namespace Panacea
         /// </summary>
         public Sam()
         {
-            // SET the 'EntityTexture' of 'Sam' to the passed in parameter:
-            this.EntityTexture = GameContent.ImgSam;
-            // SET the TextureSourceRectangle in the parent class to the base idle state:
-            this.TextureSourceRectangle = new Rectangle(1, 6, 15, 22);
-            // INITIALIZE mSpeed to '8':
-            this.moveSpeed = 8;
+            this.EntitySprite = new Game_Code.Game_Entities.Sprite(GameContent.SamSpritesheet,
+                                                                  SAM_TEXTURE_X,
+                                                                  SAM_TEXTURE_Y,
+                                                                  SAM_TEXTURE_WIDTH,
+                                                                  SAM_TEXTURE_HEIGHT);
+            //SET the Sam Object calling the method to the centre of the screen:
+            this.EntityLocn = new Vector2((Kernel.SCREEN_WIDTH / 2 - this.EntitySprite.SpriteTexture.Width / 2),
+                                          (Kernel.SCREEN_HEIGHT / 2 - this.EntitySprite.SpriteTexture.Height / 2));
+            // INITIALIZE moveSpeed to '5':
+            this.moveSpeed = 5;
         }
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace Panacea
         public Boolean GoneOutOfPlay()
         {
             // CHECK if the 'Sam' has hit the Right or Left wall:
-            if ((this.EntityLocn.X > Kernel.SCREEN_WIDTH - this.EntityTexture.Width) || (this.EntityLocn.X < 0))
+            if ((this.EntityLocn.X > Kernel.SCREEN_WIDTH - this.EntitySprite.SpriteTexture.Width) || (this.EntityLocn.X < 0))
             {
                 // RETURN True:
                 return true;
@@ -64,10 +73,10 @@ namespace Panacea
         public Boolean HitRoofOrFloor()
         {
             // CHECK if the 'Sam' has hit the floor:
-            if ((this.EntityLocn.Y > Kernel.SCREEN_HEIGHT - this.EntityTexture.Height))
+            if ((this.EntityLocn.Y > Kernel.SCREEN_HEIGHT - this.EntitySprite.SpriteTexture.Height))
             {
                 // SET it to above the floor so that it doesn't get stuck in a loop:
-                this.EntityLocn = new Vector2(this.EntityLocn.X, Kernel.SCREEN_HEIGHT - this.EntityTexture.Height);
+                this.EntityLocn = new Vector2(this.EntityLocn.X, Kernel.SCREEN_HEIGHT - this.EntitySprite.SpriteTexture.Height);
                 return true;
             }
             // CHECK if the 'Sam' has hit the roof:
@@ -92,19 +101,6 @@ namespace Panacea
             this.EntityLocn += velocity;
         }
 
-        /// <summary>
-        /// IMPLEMENTS functionality to 'serve' the ball. Will set the ball to the centre of the screen when called.
-        /// </summary>
-        public void Serve()
-        {   
-            { 
-                //SET the Sam Object calling the method to the centre of the screen:
-                this.EntityLocn = new Vector2((Kernel.SCREEN_WIDTH / 2 - this.EntityTexture.Width / 2), (Kernel.SCREEN_HEIGHT / 2 - this.EntityTexture.Height / 2));
-
-                //MULTIPLY the velocity by the mSpeed:
-                velocity *= moveSpeed;
-            }
-        }
 
         #region IMPLEMENTATION OF ICollisionResponder
         /// <summary>
@@ -139,16 +135,16 @@ namespace Panacea
             switch (eventInformation.KeyInput)
             {
                 case Keys.W:
-                    this.Velocity = new Vector2(0,-5);
+                    this.Velocity = new Vector2(0,-moveSpeed);
                     break;
                 case Keys.A:
-                    this.Velocity = new Vector2(-5,0);
+                    this.Velocity = new Vector2(-moveSpeed, 0);
                     break;
                 case Keys.S:
-                    this.Velocity = new Vector2(0,5);
+                    this.Velocity = new Vector2(0, moveSpeed);
                     break;
                 case Keys.D:
-                    this.Velocity = new Vector2(5,0);
+                    this.Velocity = new Vector2(moveSpeed, 0);
                     break;
             }
         }

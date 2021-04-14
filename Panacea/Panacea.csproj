@@ -76,6 +76,7 @@
     <Compile Include="Engine Code\Interfaces\IInputManager.cs" />
     <Compile Include="Engine Code\Managers\InputManager.cs" />
     <Compile Include="Engine Code\Interfaces\ISceneManager.cs" />
+    <Compile Include="Game Code\Game Entities\Sprite.cs" />
     <Compile Include="Game Code\Kernel.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnEntityTerminationEventArgs.cs" />
     <Compile Include="Game Code\Game Entities\GameEntity.cs" />

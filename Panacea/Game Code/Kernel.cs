@@ -101,9 +101,6 @@ namespace Panacea
             cManager.addCollidable((newBall as ICollidable));
             // SUBSCIRBE to the termination event that newBall publishes:
             (newBall as Sam).OnEntityTermination += OnEntityTermination;
-
-            // SERVE the new Sam:
-            (newBall as Sam).Serve();
         }
         
         /// <summary>
@@ -134,8 +131,6 @@ namespace Panacea
                 // IF the object in the SceneGraph is a 'Sam', call its 'Serve()' method:
                 if ((sManager as SceneManager).SceneGraph[i] is Sam)
                 {
-                    // SERVE the 'Sam' passing in the screenWidth and screenHeight:
-                    ((sManager as SceneManager).SceneGraph[i] as Sam).Serve();
                     // SUBSCRIBE to the event that is published in the Sam:
                     ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
                     // SUBSCRIBE the paddle to listen for input events and key release events:
@@ -166,14 +161,10 @@ namespace Panacea
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            // DRAW the Entities:
+            // DRAW the Entities that are in the SceneGraph:
             for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
             {
-                // DRAW all objects of type 'GameEntity' in the 'entityPool' List.
-                spriteBatch.Draw(((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityTexture, 
-                                ((sManager as SceneManager).SceneGraph[i] as GameEntity).EntityLocn,
-                                ((sManager as SceneManager).SceneGraph[i] as GameEntity).TextureSourceRectangle, // Tells the program where the texture is located on the sprite sheet
-                                Color.White);  
+                ((sManager as SceneManager).SceneGraph[i] as GameEntity).Draw(spriteBatch); 
             }
 
             spriteBatch.End();

@@ -13,11 +13,11 @@ namespace Panacea
     class GameContent
     {
         #region FIELDS
-        public static Texture2D ImgSam;
+        public static Texture2D SamSpritesheet;
         #endregion
         public GameContent(ContentManager cm)
         {
-            ImgSam = cm.Load<Texture2D>("sam_spritesheet");
+            SamSpritesheet = cm.Load<Texture2D>("sam_spritesheet");
         }
     }
 }
