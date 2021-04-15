@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using Panacea.Engine_Code.Camera;
 
 namespace Panacea
 {
@@ -22,8 +23,6 @@ namespace Panacea
         private GraphicsDeviceManager graphics;
         // DECLARE a SpriteBatch, call it 'spriteBatch':
         private SpriteBatch spriteBatch;
-        // DECLARE an instance of GameContent, call it 'gameContent':
-        private GameContent gameContent;
 
         // DECLARE an EntityManager, call it 'eManager'. Store it as its interface IEntityManager:
         private IEntityManager eManager;
@@ -33,6 +32,9 @@ namespace Panacea
         private ICollisionManager cManager;
         // DECLARE an InputManager, call it 'iManager'. Store it as its interface IInputManager:
         private IInputManager iManager;
+
+        // DECLARE a Camera, call it 'camera':
+        private Camera camera;
 
         // DECLARE a public static int to represent the Screen Width, call it 'SCREEN_WIDTH':
         public static int SCREEN_WIDTH;
@@ -72,6 +74,13 @@ namespace Panacea
             sManager = new SceneManager();
             cManager = new CollisionManager();
             iManager = new InputManager();
+            // INITIALIZE the camera:
+            camera = new Camera(GraphicsDevice.Viewport);
+            // SUBSCRIBE the camera to listen for input events:
+            iManager.Subscribe(camera, 
+                               camera.OnNewInput,
+                               camera.OnKeyReleased,
+                               camera.OnNewMouseInput);
 
             base.Initialize();
             running = true;
@@ -109,10 +118,10 @@ namespace Panacea
         /// </summary>
         protected override void LoadContent()
         {
-            // CREATE a new SpriteBatch, which can be used to draw textures.
+            // CREATE a new SpriteBatch, which can be used to draw textures:
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // INITIALIZE 'gameContent' passing in the ContentManager. This will load the game textures:
-            gameContent = new GameContent(Content);
+            // LOADING the game content:
+            GameContent.LoadContent(Content);
             // SPAWN the game objects:
             this.SpawnObjects();
         }
@@ -123,23 +132,29 @@ namespace Panacea
         private void SpawnObjects()
         {
             // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
-            sManager.spawn(eManager.createEntity<Sam>());
+            IEntity sam = eManager.createEntity<Sam>();
+            sManager.spawn(sam);
+            // SET camera focus onto Sam:
+            camera.SetFocus(sam as GameEntity);
+
 
             // ITERATE through the SceneGraph:
-            for (int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
+            for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
-                // IF the object in the SceneGraph is a 'Sam', call its 'Serve()' method:
-                if ((sManager as SceneManager).SceneGraph[i] is Sam)
+                if (sManager.SceneGraph[i] is Sam)
                 {
                     // SUBSCRIBE to the event that is published in the Sam:
-                    ((sManager as SceneManager).SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
+                    (sManager.SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
                     // SUBSCRIBE the paddle to listen for input events and key release events:
-                    (iManager as InputManager).subscribe(((sManager as SceneManager).SceneGraph[0] as IInputListener), ((sManager as SceneManager).SceneGraph[0] as Sam).OnNewInput, ((sManager as SceneManager).SceneGraph[0] as Sam).OnKeyReleased);
+                    iManager.Subscribe((sManager.SceneGraph[0] as IInputListener),
+                                       (sManager.SceneGraph[0] as Sam).OnNewInput,
+                                       (sManager.SceneGraph[0] as Sam).OnKeyReleased,
+                                       (sManager.SceneGraph[0] as Sam).OnNewMouseInput);
                 }
             }
 
             // POPULATE the CollisionManagers collidables List with objects from the Scene Graph:
-            cManager.populateCollidables((sManager as SceneManager).SceneGraph);
+            cManager.populateCollidables(sManager.SceneGraph);
         }
         /// <summary>
         /// Unloads game content.
@@ -159,12 +174,13 @@ namespace Panacea
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp,
+                              transformMatrix: camera.Transform);
 
             // DRAW the Entities that are in the SceneGraph:
-            for(int i = 0; i < (sManager as SceneManager).SceneGraph.Count; i++)
+            for(int i = 0; i < sManager.SceneGraph.Count; i++)
             {
-                ((sManager as SceneManager).SceneGraph[i] as GameEntity).Draw(spriteBatch); 
+                (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch); 
             }
 
             spriteBatch.End();
@@ -181,15 +197,17 @@ namespace Panacea
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            // CALL the SceneManagers and CollisionManagers update method if the program is running:
+            // CALL the SceneManagers and CollisionManagers Update method if the program is running:
             if (running)
             {
                 // UPDATE the CollisionManager first:
                 cManager.update();
-                // THEN update the SceneManager:
-                sManager.update();
+                // THEN Update the SceneManager:
+                sManager.Update(gameTime);
                 // UPDATE the InputManager:
                 iManager.update();
+
+                camera.Update(gameTime);
 
                 base.Update(gameTime);
             }

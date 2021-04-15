@@ -1,11 +1,15 @@
-VERSION: 0.1.4, 14-04-2021
+VERSION: 0.2.1, 15-04-2021
 
-AUTHORS: 18008890 & Marc Price
-
-Sam is spawned on the screen and can be moved around using W,A,S,D. He subscribes to key press and release events via the InputManager. 
-
-https://github.com/KristopherJR/Panacea
+AUTHORS: 18008890
 
 PATCH NOTES:
 
-- Created a Sprite class and factored out the EntityTexture into it.
+Sam is spawned on the screen. He now has a fully animated sprite that changes animation when he walks around. The InputManager has been refactored
+and now supports mouseinputs. A camera class has been developed and tracks the players movements. The user can scroll in and out using the mouse wheel.
+
+Interfaces have been refactored to implement properties, this allowed the removal of extensive type casting between InputManager and SceneManager.
+
+https://github.com/KristopherJR/Panacea
+
+
+

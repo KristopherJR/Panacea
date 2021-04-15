@@ -1,4 +1,5 @@
-﻿using Panacea.Interfaces;
+﻿using Microsoft.Xna.Framework;
+using Panacea.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Panacea
         {
             // do nothing
         }
-        public virtual void update()
+        public virtual void Update(GameTime gameTime)
         {
             // do nothing
         }

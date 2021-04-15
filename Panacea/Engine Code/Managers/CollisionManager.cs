@@ -102,7 +102,7 @@ namespace Panacea.Managers
         }
 
         /// <summary>
-        /// Default update method for objects implementing the ICollisionManager interface.
+        /// Default Update method for objects implementing the ICollisionManager interface.
         /// </summary>
         public void update()
         {

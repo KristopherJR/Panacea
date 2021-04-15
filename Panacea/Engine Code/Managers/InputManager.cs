@@ -1,32 +1,42 @@
-﻿using Panacea.InputClasses;
+﻿using Microsoft.Xna.Framework.Input;
+using Panacea.Engine_Code.UserEventArgs;
+using Panacea.InputClasses;
 using Panacea.Interfaces;
 using Panacea.UserEventArgs;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Managers
 {
     class InputManager : IInputManager, IInputPublisher
-    { 
+    {
         #region FIELDS
         // DECLARE a new event to publish when a new input occurs:
         public event EventHandler<OnInputEventArgs> NewInput;
         // DECLARE a new event that signifies a Key has been released:
         public event EventHandler<OnKeyReleasedEventArgs> KeyReleased;
 
+        // DECLARE a new event that signifies a Mouse input has occured:
+        public event EventHandler<OnMouseInputEventArgs> NewMouseInput;
+
         // DECLARE a reference to IInput, call it input:
         private IInput input;
+
         // DECLARE a List of IInputListener, call it subscribers:
         private List<IInputListener> subscribers;
-        
-        // DECLARE a KeyboardState, call it newState:
-        private KeyboardState newState;
-        // DECLARE a KeyboardState, call it oldState:
-        private KeyboardState oldState;
+
+        // DECLARE a KeyboardState, call it newKeyboardState:
+        private KeyboardState newKeyboardState;
+        // DECLARE a KeyboardState, call it oldKeyboardState:
+        private KeyboardState oldKeyboardState;
+
+        // DECLARE a MouseState, call it newMouseState:
+        private MouseState newMouseState;
+        // DECLARE a Mouse, call it oldMouseState:
+        private MouseState oldMouseState;
+
+        // DECLARE an int, call it lastScrollState:
+        private int lastScrollState;
         #endregion
 
         #region PROPERTIES
@@ -41,6 +51,49 @@ namespace Panacea.Managers
             input = new Input();
             // INITIALISE subscribers:
             subscribers = new List<IInputListener>();
+            // INITIALISE lastScrollState:
+            lastScrollState = 0;
+        }
+
+        /// <summary>
+        /// Check for new mouse inputs from the user.
+        /// </summary>
+        private void CheckNewMouseInput()
+        {
+            // GET the current Mouse State:
+            newMouseState = ((input as Input).MouseInput).GetCurrentState();
+            
+            foreach (IInputListener sub in subscribers)
+            {
+                // IF there are subscribers to mouse input events:
+                if(NewMouseInput != null)
+                {
+                    // IF the mouse button has been pressed and the current mouse state is different to the previous:
+                    if(newMouseState.LeftButton == ButtonState.Pressed && newMouseState.LeftButton != oldMouseState.LeftButton)
+                    {
+                        // FIRE the event passing in the mouse state:
+                        this.OnNewMouseInput(newMouseState, 0);
+                    }
+                    // USER has scrolled up:
+                    if (newMouseState.ScrollWheelValue > lastScrollState)
+                    {
+                        // FIRE the event passing in the mouse state:
+                        this.OnNewMouseInput(newMouseState, 1);
+                        // STORE the previous scroll wheel state:
+                        lastScrollState = newMouseState.ScrollWheelValue;
+                    }
+                    // USER has scrolled down:
+                    if (newMouseState.ScrollWheelValue < lastScrollState)
+                    {          
+                        this.OnNewMouseInput(newMouseState, -1);
+                        lastScrollState = newMouseState.ScrollWheelValue;
+                    }
+                    
+                }
+            }
+            // STORE the current state as oldMouseState:
+            oldMouseState = newMouseState;
+
         }
 
         /// <summary>
@@ -49,9 +102,10 @@ namespace Panacea.Managers
         private void CheckNewInput()
         {
             // GET the current Keyboard State:
-            newState = ((input as Input).KeyboardInput).GetCurrentState();
+            newKeyboardState = ((input as Input).KeyboardInput).GetCurrentState();
+
             // STORE any keys that are pressed into a new variable, 'keysPressed':
-            Keys[] keysPressed = newState.GetPressedKeys();
+            Keys[] keysPressed = newKeyboardState.GetPressedKeys();
             // LOOP for the amount of keys that have been pressed:
             foreach (Keys key in keysPressed)
             {
@@ -61,7 +115,7 @@ namespace Panacea.Managers
                     // TEMPORARILY store the subscribers KOI as its own variable:
                     Keys[] tempKOI = sub.getKOI();
                     // CHECK if the pressed 'key' matches a key in the subscribers KeysOfInterest:
-                    for(int i=0; i < tempKOI.Length; i++)
+                    for (int i = 0; i < tempKOI.Length; i++)
                     {
                         if (tempKOI[i] == key)
                         {
@@ -70,8 +124,8 @@ namespace Panacea.Managers
                             {
                                 // FIRE the event and pass in the key that was pressed:
                                 this.OnNewInput(key);
-                                // SET oldState to newState:
-                                oldState = newState;
+                                // SET oldKeyboardState to newKeyboardState:
+                                oldKeyboardState = newKeyboardState;
                             }
                         }
                     }
@@ -93,7 +147,7 @@ namespace Panacea.Managers
                 for (int i = 0; i < tempKOI.Length; i++)
                 {
                     // IF a previously pressed key of interest has been released:
-                    if (newState.IsKeyUp(tempKOI[i]) && oldState.IsKeyDown(tempKOI[i]))
+                    if (newKeyboardState.IsKeyUp(tempKOI[i]) && oldKeyboardState.IsKeyDown(tempKOI[i]))
                     {
                         // FIRE the key release event, passing in the current Key of interest:
                         this.OnKeyReleased(tempKOI[i]);
@@ -120,31 +174,44 @@ namespace Panacea.Managers
         /// <param name="keyReleased">Key that was just released.</param>
         public virtual void OnKeyReleased(Keys keyReleased)
         {
-            // STORE some information aabout the event and the keyReleased:
+            // STORE some information about the event and the keyReleased:
             OnKeyReleasedEventArgs args = new OnKeyReleasedEventArgs(keyReleased);
             // FIRE the event to listeners:
             KeyReleased(this, args);
         }
 
         /// <summary>
-        /// Default update method for classes implementing IInputManager Interface.
+        /// Called when a mouse input occurs.
+        /// </summary>
+        /// <param name="mouseState">A Snapshot of the mouse state.</param>
+        public virtual void OnNewMouseInput(MouseState mouseState, int scrollValue)
+        {
+            // STORE some information about the event and the mouse state:
+            OnMouseInputEventArgs args = new OnMouseInputEventArgs(mouseState, scrollValue);
+            // FIRE the event to listeners:
+            NewMouseInput(this, args);
+        }
+        /// <summary>
+        /// Default Update method for classes implementing IInputManager Interface.
         /// </summary>
         public void update()
         {
             // look for changes in input data
             this.CheckNewInput();
             this.CheckKeyReleased();
+            this.CheckNewMouseInput();
         }
         #endregion
 
         #region IMPLEMENTATION OF IInputPublisher
         /// <summary>
-        /// Allows a listener to subscribe to the InputManager to watch for changes in input. Method from Marc Price, Week 18 Input slides on BlackBoard.
+        /// Allows a listener to Subscribe to the InputManager to watch for changes in input. Method from Marc Price, Week 18 Input slides on BlackBoard.
         /// </summary>
         /// <param name="subscriber">A reference to the object subscribing to events from InputManager.</param>
-        /// <param name="inputHandler">The input handler to subscribe to the event.</param>
-        /// <param name="releaseHandler">The key release handler to subscribe to the event.</param>
-        public void subscribe(IInputListener subscriber, EventHandler<OnInputEventArgs> inputHandler, EventHandler<OnKeyReleasedEventArgs> releaseHandler)
+        /// <param name="inputHandler">The input handler to Subscribe to the event.</param>
+        /// <param name="releaseHandler">The key release handler to Subscribe to the event.</param>
+        /// <param name="mouseInputHandler">The mouse input handler to Subscribe to the event.</param>
+        public void Subscribe(IInputListener subscriber, EventHandler<OnInputEventArgs> inputHandler, EventHandler<OnKeyReleasedEventArgs> releaseHandler, EventHandler<OnMouseInputEventArgs> mouseInputHandler)
         {
             // ADD the new subscriber to the subscribers List:
             subscribers.Add(subscriber);
@@ -152,6 +219,8 @@ namespace Panacea.Managers
             NewInput += inputHandler;
             // ADD key released handler:
             KeyReleased += releaseHandler;
+            // ADD mouse input handler:
+            NewMouseInput += mouseInputHandler;
         }
 
         /// <summary>
@@ -160,7 +229,9 @@ namespace Panacea.Managers
         /// <param name="subscriber">A reference to the unsubscribing object of InputManager events.</param>
         /// <param name="inputHandler">The input handler to unsubscribe from the event.</param>
         /// <param name="releaseHandler">The key release handler to unsubscribe from the event.</param>
-        public void unsubscribe(IInputListener subscriber, EventHandler<OnInputEventArgs> inputHandler, EventHandler<OnKeyReleasedEventArgs> releaseHandler)
+        /// <param name="mouseInputHandler">The mouse input handler to unsubscribe from the event."</param>
+        /// 
+        public void Unsubscribe(IInputListener subscriber, EventHandler<OnInputEventArgs> inputHandler, EventHandler<OnKeyReleasedEventArgs> releaseHandler, EventHandler<OnMouseInputEventArgs> mouseInputHandler)
         {
             // REMOVE the subscriber from the subscribers List:
             subscribers.Remove(subscriber);
@@ -168,6 +239,8 @@ namespace Panacea.Managers
             NewInput -= inputHandler;
             // UNSUBSCRIBE from the key release event:
             KeyReleased -= releaseHandler;
+            // // UNSUBSCRIBE from the mouse input event:
+            NewMouseInput -= mouseInputHandler;
         }
         #endregion
     }

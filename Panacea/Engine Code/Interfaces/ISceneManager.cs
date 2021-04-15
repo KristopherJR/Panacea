@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ namespace Panacea.Interfaces
 {
     interface ISceneManager
     {
+        /// <summary>
+        /// The SceneGraph.
+        /// </summary>
+        /// <returns>The SceneGraph.</returns>
+        List<IEntity> SceneGraph { get; }
         /// <summary>
         /// Add an object of type 'IEntity' to the 'sceneGraph'. The entity should be provided by the Kernel.
         /// </summary>
@@ -22,8 +28,8 @@ namespace Panacea.Interfaces
         void despawn(String UName, int UID);
 
         /// <summary>
-        /// Default update method for objects implementing the ISceneManager interface.
+        /// Default Update method for objects implementing the ISceneManager interface.
         /// </summary>
-        void update();
+        void Update(GameTime gameTime);
     }
 }

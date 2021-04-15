@@ -14,20 +14,15 @@ namespace Panacea.InputClasses
         #endregion
         #region PROPERTIES
         #endregion
-        public KeyboardInput()
-        {
-            //do nothing
-        }
-
         /// <summary>
         /// gets the current state of the Keyboard and returns it.
         /// </summary>
         /// <returns>The current state of the keyboard.</returns>
         public KeyboardState GetCurrentState()
         {
-            // CREATE a new instance of KeyboardState, called newState. Assigned it to the current Keyboard state:
+            // CREATE a new instance of KeyboardState, called newKeyboardState. Assigned it to the current Keyboard state:
             KeyboardState newState = Keyboard.GetState();
-            // RETURN newState:
+            // RETURN newKeyboardState:
             return newState;
         }
     }

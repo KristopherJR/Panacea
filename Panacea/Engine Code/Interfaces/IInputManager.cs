@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Panacea.Interfaces
 {
-    interface IInputManager
+    interface IInputManager : IInputPublisher
     {
         /// <summary>
         /// Called when a new input occurs. Method from Marc Price, Week 18 Input slides on BlackBoard.
@@ -22,7 +22,14 @@ namespace Panacea.Interfaces
         void OnKeyReleased(Keys keyReleased);
 
         /// <summary>
-        /// Default update method for classes implementing IInputManager Interface.
+        /// Called when a mouse input occurs.
+        /// </summary>
+        /// <param name="mouseState">A Snapshot of the mouse state.</param>
+        /// <param name="scrollValue">An int representing which direction the scroll wheel is moving.</param>
+        void OnNewMouseInput(MouseState mouseState, int scrollValue);
+
+        /// <summary>
+        /// Default Update method for classes implementing IInputManager Interface.
         /// </summary>
         void update();
     }

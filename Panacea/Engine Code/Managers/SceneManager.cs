@@ -2,10 +2,11 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using Panacea.Engine_Code.Interfaces;
 
 namespace Panacea.Managers
 {
-    class SceneManager : ISceneManager
+    class SceneManager : ISceneManager, IUpdatable
     {
         #region FIELDS
         // DECLARE a new 'List' storing 'IEntity' objects, call it 'sceneGraph':
@@ -63,29 +64,28 @@ namespace Panacea.Managers
         }
 
         /// <summary>
-        /// METHOD: Calls the update method of each entity in the sceneGraph to make them move.
+        /// METHOD: Calls the Update method of each entity in the sceneGraph to make them move.
         /// </summary>
-        private void moveEntities()
+        private void moveEntities(GameTime gameTime)
         {  
             // ITERATE through the 'sceneGraphCopy':
             foreach (IEntity entity in sceneGraph)
             {
-                // IF the object in the List is a 'Sam':
-                if (entity is Sam)
-                {
-                    // MOVE the ball by it's X and Y speed:
-                    (entity as Sam).update();
-                }
+                // MOVE the ball by it's X and Y speed:
+                entity.Update(gameTime);
+                
             }
         }
+        #endregion
 
+        #region IMPLEMENTATION OF IUpdatable
         /// <summary>
-        /// Default update method for objects implementing the ISceneManager interface.
+        /// Default Update method for objects implementing the ISceneManager interface.
         /// </summary>
-        public void update()
+        public void Update(GameTime gameTime)
         {
             // CALL the moveEntities() method:
-            this.moveEntities();
+            this.moveEntities(gameTime);
         }
         #endregion
     }

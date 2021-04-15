@@ -29,6 +29,16 @@ namespace Panacea.Game_Code.Game_Entities
             get { return spriteTexture; } // get method
             set { spriteTexture = value; } // set method
         }
+
+        public int TextureWidth
+        {
+            get { return textureWidth; }
+        }
+
+        public int TextureHeight
+        {
+            get { return textureHeight; }
+        }
         #endregion
         /// <summary>
         /// Constructor for a Sprite.

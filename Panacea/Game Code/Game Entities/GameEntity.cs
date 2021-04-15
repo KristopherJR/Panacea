@@ -15,11 +15,12 @@ namespace Panacea
     {
         #region FIELDS
         // DECLARE a reference to a Sprite object, call it "entitySprite". This is used to store graphical information about the entity as a Sprite:
-        private Sprite entitySprite;
+        protected Sprite entitySprite;
         // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the GameEntities Location:
         private Vector2 entityLocn;
         // DECLARE a reference to a Vector2 object, call it "velocity". This is used to represent velocity values of PongEntities:
         protected Vector2 velocity;
+
         #endregion
 
         #region PROPERTIES
@@ -60,7 +61,7 @@ namespace Panacea
         /// Called from Kernel, tells the GameEntity to draw itself onto the spriteBatch parameter passed in.
         /// </summary>
         /// <param name="spriteBatch">The games SpriteBatch.</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             entitySprite.Draw(spriteBatch, entityLocn);
         }
