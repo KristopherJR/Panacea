@@ -17,8 +17,8 @@ namespace Panacea.Engine_Code.Camera
     {
         // DECLARE a Matrix, call it 'transform':
         private Matrix transform;
-        // DECLARE a float, call it 'zoom':
-        private float zoom;
+        // DECLARE a float, call it 'zoomAspect':
+        private float zoomAspect;
         // DECLARE a float, call it 'scrollSpeed':
         private float scrollSpeed;
         // DECLARE a Viewport, call it 'viewport':
@@ -40,7 +40,7 @@ namespace Panacea.Engine_Code.Camera
         {
             // INITIALIZE fields:
             transform = new Matrix();
-            zoom = 2.0f;
+            zoomAspect = 2.0f;
             scrollSpeed = 0.1f;
             this.viewport = viewport;
         }
@@ -64,7 +64,7 @@ namespace Panacea.Engine_Code.Camera
         {
             transform = Matrix.CreateTranslation(-focusedEntity.EntityLocn.X, -focusedEntity.EntityLocn.Y, 0) * // Main Translation Matrix
                 //Matrix.CreateTranslation(-ClampPosition.X + ClampSize.X, -ClampPosition.Y + ClampSize.Y, 0) *
-                Matrix.CreateScale(new Vector3(zoom, zoom, 1)) * // Scale Matrix
+                Matrix.CreateScale(new Vector3(zoomAspect, zoomAspect, 1)) * // Scale Matrix
                 Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0)); // Origin Offset Matrix
         }
 
@@ -80,8 +80,8 @@ namespace Panacea.Engine_Code.Camera
 
         public void OnNewMouseInput(object sender, OnMouseInputEventArgs eventInformation)
         {
-            zoom += eventInformation.ScrollValue * scrollSpeed;
-            Console.WriteLine(zoom);
+            zoomAspect += eventInformation.ScrollValue * scrollSpeed;
+            Console.WriteLine(zoomAspect);
         }
 
         public Keys[] getKOI()

@@ -1,15 +1,27 @@
-VERSION: 0.2.1, 15-04-2021
+VERSION: 0.2.2, 15-04-2021
 
-AUTHORS: 18008890
+AUTHORS: Kristopher John Randle
 
-PATCH NOTES:
+PATCH SUMMARY:
 
-Sam is spawned on the screen. He now has a fully animated sprite that changes animation when he walks around. The InputManager has been refactored
-and now supports mouseinputs. A camera class has been developed and tracks the players movements. The user can scroll in and out using the mouse wheel.
-
-Interfaces have been refactored to implement properties, this allowed the removal of extensive type casting between InputManager and SceneManager.
+TileMap has been created and a tile has been drawn into the world. Additions were made to the engine.
 
 https://github.com/KristopherJR/Panacea
 
+PATCH NOTES:
 
+- Commented and tidied more code.
+- Loaded the world tileset into the MonoGame pipeline.
+- Loaded the world tileset in GameContent.
+- Created a new class called Tile.
+- Created a new class called TileMap.
+- Moved AnimatedEntity into EngineCode.
+- Moved Animation into EngineCode.
+- Moved GameEntity into EngineCode.
+- Moved Sprite into EngineCode.
+- Added a Folder called Characters to the Game Entities Folder in Game Code.
+- Added a Folder called World to the Game Code Folder.
+
+- Added a new Dictionary to store all Tile Sprites in GameContent.
+- Added a new Enum to store the name of each Tile Sprite in GameContent.
 

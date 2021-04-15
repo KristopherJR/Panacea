@@ -24,3 +24,4 @@ D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CoreCompil
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CopyComplete
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.pdb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\inner_tilesheet.xnb

@@ -17,10 +17,9 @@ namespace Panacea
         // DECLARE a reference to a Sprite object, call it "entitySprite". This is used to store graphical information about the entity as a Sprite:
         protected Sprite entitySprite;
         // DECLARE a reference to a Vector2 object, call it "entityLocn". This is used to store the GameEntities Location:
-        private Vector2 entityLocn;
-        // DECLARE a reference to a Vector2 object, call it "velocity". This is used to represent velocity values of PongEntities:
-        protected Vector2 velocity;
-
+        protected Vector2 entityLocn;
+        // DECLARE a reference to a Vector2 object, call it "entityVelocity". This is used to represent entityVelocity values of PongEntities:
+        protected Vector2 entityVelocity;
         #endregion
 
         #region PROPERTIES
@@ -41,10 +40,10 @@ namespace Panacea
             set { entityLocn = value; } // set method
         }
 
-        public Vector2 Velocity
+        public Vector2 EntityVelocity
         {
-            get { return velocity; } // get method
-            set { velocity = value; } // set method
+            get { return entityVelocity; } // get method
+            set { entityVelocity = value; } // set method
         }
         #endregion
 

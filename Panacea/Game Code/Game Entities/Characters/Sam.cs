@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using Panacea.Engine_Code.UserEventArgs;
+using Panacea.Game_Code.Game_Entities;
 using Panacea.Interfaces;
 using Panacea.UserEventArgs;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Panacea.Game_Code.Game_Entities;
-using Panacea.Engine_Code.UserEventArgs;
+using System;
 
 namespace Panacea
 {
@@ -26,6 +20,7 @@ namespace Panacea
         #endregion
 
         #region PROPERTIES
+        
         #endregion
 
         /// <summary>
@@ -47,7 +42,7 @@ namespace Panacea
         {
             base.Update(gameTime);
             // MOVE the ball by it's X and Y speed:
-            this.EntityLocn += velocity;
+            this.EntityLocn += entityVelocity;
         }
 
 
@@ -73,24 +68,32 @@ namespace Panacea
         /// <param name="eventInformation">Information about the input event.</param>
         public virtual void OnNewInput(object sender, OnInputEventArgs eventInformation)
         {
-            //Respond to new input:
+            // RESPOND to new input, checking which key was pressed by the user:
             switch (eventInformation.KeyInput)
             {
                 case Keys.W:
-                    this.Velocity = new Vector2(0,-moveSpeed);
-                    this.animation = GameContent.GetAnimation(AnimationGroup.SamWalkUp);
+                    // MOVE player UP by movespeed:
+                    this.EntityVelocity = new Vector2(0,-moveSpeed);
+                    // SET Sams entityAnimation to walking UP:
+                    this.entityAnimation = GameContent.GetAnimation(AnimationGroup.SamWalkUp);
                     break;
                 case Keys.A:
-                    this.Velocity = new Vector2(-moveSpeed, 0);
-                    this.animation = GameContent.GetAnimation(AnimationGroup.SamWalkLeft);
+                    // MOVE player LEFT by movespeed:
+                    this.EntityVelocity = new Vector2(-moveSpeed, 0);
+                    // SET Sams entityAnimation to walking LEFT:
+                    this.entityAnimation = GameContent.GetAnimation(AnimationGroup.SamWalkLeft);
                     break;
                 case Keys.S:
-                    this.Velocity = new Vector2(0, moveSpeed);
-                    this.animation = GameContent.GetAnimation(AnimationGroup.SamWalkDown);
+                    // MOVE player RIGHT by movespeed:
+                    this.EntityVelocity = new Vector2(0, moveSpeed);
+                    // SET Sams entityAnimation to walking RIGHT:
+                    this.entityAnimation = GameContent.GetAnimation(AnimationGroup.SamWalkDown);
                     break;
                 case Keys.D:
-                    this.Velocity = new Vector2(moveSpeed, 0);
-                    this.animation = GameContent.GetAnimation(AnimationGroup.SamWalkRight);
+                    // MOVE player DOWN by movespeed:
+                    this.EntityVelocity = new Vector2(moveSpeed, 0);
+                    // SET Sams entityAnimation to walking DOWN:
+                    this.entityAnimation = GameContent.GetAnimation(AnimationGroup.SamWalkRight);
                     break;
             }
         }
@@ -102,20 +105,24 @@ namespace Panacea
         /// <param name="eventInformation">Information about the input event.</param>
         public virtual void OnKeyReleased(object sender, OnKeyReleasedEventArgs eventInformation)
         {
-            //Respond to new input:
+            // RESPOND to new input, checking which key was released by the user:
             switch (eventInformation.KeyReleased)
             {
                 case Keys.W:
-                    this.Velocity = new Vector2(0,0);
+                    // STOP the players movement:
+                    this.EntityVelocity = new Vector2(0,0);
                     break;
                 case Keys.A:
-                    this.Velocity = new Vector2(0,0);
+                    // STOP the players movement:
+                    this.EntityVelocity = new Vector2(0,0);
                     break;
                 case Keys.S:
-                    this.Velocity = new Vector2(0,0);
+                    // STOP the players movement:
+                    this.EntityVelocity = new Vector2(0,0);
                     break;
                 case Keys.D:
-                    this.Velocity = new Vector2(0,0);
+                    // STOP the players movement:
+                    this.EntityVelocity = new Vector2(0,0);
                     break;
             }
         }

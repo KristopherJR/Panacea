@@ -4,9 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/Documents/Programming/Panacea/Panacea/Content/inner_tilesheet.png</File>
     <File>D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

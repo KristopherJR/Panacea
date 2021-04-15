@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using Panacea.Engine_Code.Camera;
+using Panacea.Game_Code;
 
 namespace Panacea
 {
@@ -35,6 +36,8 @@ namespace Panacea
 
         // DECLARE a Camera, call it 'camera':
         private Camera camera;
+        // DECLARE a TileMap, call it 'tileMap':
+        private TileMap tileMap;
 
         // DECLARE a public static int to represent the Screen Width, call it 'SCREEN_WIDTH':
         public static int SCREEN_WIDTH;
@@ -74,6 +77,7 @@ namespace Panacea
             sManager = new SceneManager();
             cManager = new CollisionManager();
             iManager = new InputManager();
+
             // INITIALIZE the camera:
             camera = new Camera(GraphicsDevice.Viewport);
             // SUBSCRIBE the camera to listen for input events:
@@ -122,6 +126,7 @@ namespace Panacea
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // LOADING the game content:
             GameContent.LoadContent(Content);
+            tileMap = new TileMap();
             // SPAWN the game objects:
             this.SpawnObjects();
         }
@@ -136,7 +141,7 @@ namespace Panacea
             sManager.spawn(sam);
             // SET camera focus onto Sam:
             camera.SetFocus(sam as GameEntity);
-
+            
 
             // ITERATE through the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
@@ -177,8 +182,11 @@ namespace Panacea
             spriteBatch.Begin(samplerState: SamplerState.PointClamp,
                               transformMatrix: camera.Transform);
 
+            // DRAW the TileMap:
+            tileMap.DrawTileMap(spriteBatch);
+
             // DRAW the Entities that are in the SceneGraph:
-            for(int i = 0; i < sManager.SceneGraph.Count; i++)
+            for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
                 (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch); 
             }

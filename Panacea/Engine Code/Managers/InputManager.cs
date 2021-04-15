@@ -112,7 +112,7 @@ namespace Panacea.Managers
                 // LOOP through all subscribers:
                 foreach (IInputListener sub in subscribers)
                 {
-                    // TEMPORARILY store the subscribers KOI as its own variable:
+                    // TEMPORARILY store the subscribers getKOI as its own variable:
                     Keys[] tempKOI = sub.getKOI();
                     // CHECK if the pressed 'key' matches a key in the subscribers KeysOfInterest:
                     for (int i = 0; i < tempKOI.Length; i++)
@@ -141,7 +141,7 @@ namespace Panacea.Managers
             // LOOP through all subscribers:
             foreach (IInputListener sub in subscribers)
             {
-                // TEMPORARILY store the subscribers KOI as its own variable:
+                // TEMPORARILY store the subscribers getKOI as its own variable:
                 Keys[] tempKOI = sub.getKOI();
                 // CHECK if the pressed 'key' matches a key in the subscribers KeysOfInterest:
                 for (int i = 0; i < tempKOI.Length; i++)
