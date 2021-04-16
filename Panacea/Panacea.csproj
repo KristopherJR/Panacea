@@ -71,6 +71,7 @@
     <Compile Include="Engine Code\UserEventArgs\OnMouseInputEventArgs.cs" />
     <Compile Include="Engine Code\Entities\Animation.cs" />
     <Compile Include="Engine Code\Entities\AnimatedEntity.cs" />
+    <Compile Include="Game Code\Game Entities\Characters\Mary.cs" />
     <Compile Include="Game Code\Game Entities\Characters\Sam.cs" />
     <Compile Include="Engine Code\Entities\Entity.cs" />
     <Compile Include="Engine Code\Managers\EntityManager.cs" />

@@ -1,18 +1,20 @@
-VERSION: 0.3.1, 16-04-2021
+VERSION: 0.4.1, 16-04-2021
 
 AUTHORS: Kristopher John Randle
 
 PATCH SUMMARY:
 
-Two Tile Maps created, one for the floor tiles and one for wall tiles. Collision Manager has been MASSIVELY optimised. Player can collide with walls
-and objects
+Player can now make Sam sprint by pressing Shift. His animation changes when he is sprinting.
 
 https://github.com/KristopherJR/Panacea
 
 PATCH NOTES:
 
-- Commented and tidied more code.
-- Created two tilesets
-- Optimized Collision Manager. it used to use 98% CPU performing checks, now it only uses 3.33%.
-- Player can collide with Walls and Objects.
+- Added 4 new Enums to AnimationGroup for Sams Sprint Animation
+- Loaded the 4 new animations in GameContent
+- Added a 'KeyOfInterest' to Sam - 'LeftShift'.
+- Added a bool, 'isSprintEnabled'
+- Added a bool, 'isSprintReleased'
+- Added Sprint logic and changed animation if Sam is sprinting.
+
 

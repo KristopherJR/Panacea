@@ -13,7 +13,8 @@ namespace Panacea
     public enum AnimationGroup
     {
         // DEFINE Sams Enums for his animations:
-        SamWalkDown, SamWalkUp, SamWalkLeft, SamWalkRight
+        SamWalkDown, SamWalkUp, SamWalkLeft, SamWalkRight,
+        SamSprintDown, SamSprintUp, SamSprintRight, SamSprintLeft
     }
     /// <summary>
     /// Static class GameContent. Used to store all of the games images, sounds and font in one contained place.
@@ -26,7 +27,7 @@ namespace Panacea
         // DECLARE a static Texture2D, call it WorldTileSheet:
         public static Texture2D WorldTileSheet;
         // DECLARE a const int, call it DEFAULT_FRAMERATE and set it to 6fps:
-        private const int DEFAULT_FRAMERATE = 6;
+        public const int DEFAULT_FRAMERATE = 6;
         // DECLARE a const int, call it DEFAULT_TILE_WIDTH and set it to 16:
         public const int DEFAULT_TILE_WIDTH = 16;
         // DECLARE a const int, call it DEFAULT_TILE_HEIGHT and set it to 16:
@@ -40,7 +41,6 @@ namespace Panacea
         private static Dictionary<AnimationGroup, Animation> animations;
         // DECLARE a stiatc Dictionary to store all Tile Sprites. Reference each one by an int id:
         private static Dictionary<int, Sprite> tileSprites;
-
         #endregion
 
         /// <summary>
@@ -67,11 +67,20 @@ namespace Panacea
             LoadAnimation(4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, AnimationGroup.SamWalkUp);
             // LOAD Sam Walking Left:
             LoadAnimation(4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, AnimationGroup.SamWalkLeft);
+
+            // LOAD Sam Sprinting Down:
+            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, AnimationGroup.SamSprintDown);
+            // LOAD Sam Sprinting Right:
+            LoadAnimation(4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, AnimationGroup.SamSprintRight);
+            // LOAD Sam Sprinting Up:
+            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, AnimationGroup.SamSprintUp);
+            // LOAD Sam Sprinting Left:
+            LoadAnimation(4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, AnimationGroup.SamSprintLeft);
             #endregion
 
             #region LOADING TILESPRITES
             // LOAD the Tile Sprites:
-            for(int i=0; i < NUMBER_OF_TILES; i++)
+            for (int i=0; i < NUMBER_OF_TILES; i++)
             {
                 ExtractTile(i);
             }

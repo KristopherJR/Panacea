@@ -204,10 +204,13 @@ namespace Panacea
             // DRAW the Entities that are in the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
+                // STOP this loop from drawing the TileMap, as tiles are in the SceneGraph but have their own unique draw method in TileMap:
                 if(sManager.SceneGraph[i] is Tile)
                 {
+                    // IF it's a Tile, break the loop:
                     break;
                 }
+                // IF not, draw the GameEntity to the SpriteBatch:
                 (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch); 
             }
 
@@ -234,7 +237,7 @@ namespace Panacea
                 sManager.Update(gameTime);
                 // UPDATE the InputManager:
                 iManager.update();
-
+                // UPDATE the Camera:
                 camera.Update(gameTime);
 
                 base.Update(gameTime);
