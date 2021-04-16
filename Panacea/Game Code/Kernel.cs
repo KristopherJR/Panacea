@@ -20,6 +20,9 @@ namespace Panacea
         // DECLARE a public static Boolean, call it 'running':
         public static Boolean running;
 
+        private const String TILE_MAP_FLOOR_PATH = "Content/Janice_Floor_Layer.csv";
+        private const String TILE_MAP_WALLS_PATH = "Content/Janice_Wall_Layer.csv";
+
         // DECLARE a GraphicsDeviceManager, call it 'graphics':
         private GraphicsDeviceManager graphics;
         // DECLARE a SpriteBatch, call it 'spriteBatch':
@@ -36,8 +39,10 @@ namespace Panacea
 
         // DECLARE a Camera, call it 'camera':
         private Camera camera;
-        // DECLARE a TileMap, call it 'tileMap':
-        private TileMap tileMap;
+        // DECLARE a TileMap, call it 'tileMapFloor':
+        private TileMap tileMapFloor;
+        // DECLARE a TileMap, call it 'tileMapWalls':
+        private TileMap tileMapWalls;
 
         // DECLARE a public static int to represent the Screen Width, call it 'SCREEN_WIDTH':
         public static int SCREEN_WIDTH;
@@ -126,7 +131,9 @@ namespace Panacea
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // LOADING the game content:
             GameContent.LoadContent(Content);
-            tileMap = new TileMap();
+            // INITALIZE tilemaps:
+            tileMapFloor = new TileMap(TILE_MAP_FLOOR_PATH, false);
+            tileMapWalls = new TileMap(TILE_MAP_WALLS_PATH, true);
             // SPAWN the game objects:
             this.SpawnObjects();
         }
@@ -139,6 +146,15 @@ namespace Panacea
             // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
             IEntity sam = eManager.createEntity<Sam>();
             sManager.spawn(sam);
+
+            // ADD IENTITY TILES TO SCENEGRAPH HERE
+
+            foreach (Tile t in tileMapWalls.GetTileMap())
+            {
+                sManager.spawn(t);
+            }
+
+
             // SET camera focus onto Sam:
             camera.SetFocus(sam as GameEntity);
             
@@ -159,7 +175,7 @@ namespace Panacea
             }
 
             // POPULATE the CollisionManagers collidables List with objects from the Scene Graph:
-            cManager.populateCollidables(sManager.SceneGraph);
+            cManager.PopulateCollidables(sManager.SceneGraph);
         }
         /// <summary>
         /// Unloads game content.
@@ -176,18 +192,22 @@ namespace Panacea
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(samplerState: SamplerState.PointClamp,
                               transformMatrix: camera.Transform);
 
-            // DRAW the TileMap:
-            tileMap.DrawTileMap(spriteBatch);
-
+            // DRAW the TileMaps:
+            tileMapFloor.DrawTileMap(spriteBatch);
+            tileMapWalls.DrawTileMap(spriteBatch);
             // DRAW the Entities that are in the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
+                if(sManager.SceneGraph[i] is Tile)
+                {
+                    break;
+                }
                 (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch); 
             }
 

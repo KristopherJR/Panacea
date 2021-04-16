@@ -14,6 +14,8 @@ namespace Panacea.Managers
         #region FIELDS
         // DECLARE a new 'List' storing 'ICollidable' objects, call it 'collidables'. This will hold a reference to all objects in the SceneGraph implementing ICollidable (Balls and Paddles):
         private List<ICollidable> collidables;
+        // DECLARE a new List storing ICollisionResponders, call it collisionGraph:
+        private List<ICollisionResponder> collisionGraph;
         #endregion
 
         #region PROPERTIES
@@ -25,20 +27,31 @@ namespace Panacea.Managers
         public CollisionManager()
         {
             // INITALISE 'collidables':
-            collidables = new List<ICollidable>();  
+            collidables = new List<ICollidable>();
+            collisionGraph = new List<ICollisionResponder>();
         }
 
         #region IMPLEMENTATION OF ICollisionManager
         /// <summary>
         /// Adds all ICollidables in the Scene Graph to the collidables List on start-up.
         /// </summary>
-        public void populateCollidables(List<IEntity> sceneGraphCopy)
+        public void PopulateCollidables(List<IEntity> sceneGraphCopy)
         {
             // ITERATE through the sceneGraphCopy:
             foreach(ICollidable c in sceneGraphCopy)
             {
-                // ADD each ICollidable in sceneGraphCopy to collidables:
-                collidables.Add(c);
+                if(c.IsCollidable)
+                {
+                    // ADD each ICollidable in sceneGraphCopy to collidables:
+                    collidables.Add(c); 
+                }
+            }
+            foreach(IEntity c in sceneGraphCopy)
+            {
+                if(c is ICollisionResponder)
+                {
+                    collisionGraph.Add(c as ICollisionResponder);
+                }
             }
         }
 
@@ -77,25 +90,17 @@ namespace Panacea.Managers
         /// Iterate through the stored entities and check if a Collision has occured. React appropriately if a collision has occured.
         /// Method based on code by Marc Price.
         /// </summary>
-        public void checkEntityCollisions()
+        public void CheckEntityCollisions()
         {
             // CHECK for collisions in pairs:
-            for(int i=0; i < collidables.Count() -1; i++)
+            for(int i=0; i < collidables.Count; i++)
             {
-                for (int j = i + 1; j < collidables.Count(); j++)
-                {
-                    // CHECK that the collider is an ICollisionResponder:
-                    if (collidables[i] is ICollisionResponder)
+                for (int j = 0; j < collisionGraph.Count; j++)
+                { 
+                    if(collisionGraph[j] != collidables[i])
                     {
                         // CALL CollisionResponse to check if 'i' collided with 'j'. If they did, respond appropriately:
-                        (collidables[i] as ICollisionResponder).CheckAndRespond(collidables[j]);
-                        
-                    }
-                    // NOTE: Not as redundant as it may seem. Functionality is broken without this second check:
-                    if (collidables[j] is ICollisionResponder)
-                    {
-                        // CALL CollisionResponse to check if 'j' collided with 'i'. If they did, respond appropriately:
-                        (collidables[j] as ICollisionResponder).CheckAndRespond(collidables[i]);
+                        collisionGraph[j].CheckAndRespond(collidables[i]);
                     }
                 }
             }
@@ -106,8 +111,8 @@ namespace Panacea.Managers
         /// </summary>
         public void update()
         {
-            // CALL 'checkEntityCollisions()':
-            this.checkEntityCollisions();
+            // CALL 'CheckEntityCollisions()':
+            this.CheckEntityCollisions();
         }
         #endregion
     }

@@ -12,7 +12,7 @@ namespace Panacea.Interfaces
         /// <summary>
         /// Adds all ICollidables in the Scene Graph to the collidables List on start-up.
         /// </summary>
-        void populateCollidables(List<IEntity> sceneGraphCopy);
+        void PopulateCollidables(List<IEntity> sceneGraphCopy);
 
         /// <summary>
         /// Remove the specified item matching the provided uName and uID from the collidables List. Usually called after an item has been
@@ -31,7 +31,7 @@ namespace Panacea.Interfaces
         /// <summary>
         /// Iterate through the stored entities and check if a Collision has occured. React appropriately if a collision has occured.
         /// </summary>
-        void checkEntityCollisions();
+        void CheckEntityCollisions();
 
         /// <summary>
         /// Default Update method for objects implementing the ICollisionManager interface.

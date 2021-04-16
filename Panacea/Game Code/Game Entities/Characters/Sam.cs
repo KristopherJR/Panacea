@@ -17,10 +17,15 @@ namespace Panacea
         public event EventHandler<OnEntityTerminationEventArgs> OnEntityTermination;
         // DECLARE an array of Keys[] called keysOfInterest. This will contain only the keys that we need to know about being pressed:
         private Keys[] keysOfInterest = { Keys.W, Keys.A, Keys.S, Keys.D };
+        private Vector2 lastPosition;
         #endregion
 
         #region PROPERTIES
-        
+        public bool IsCollidable
+        {
+            get { return isCollidable; }
+            set { isCollidable = value; }
+        }
         #endregion
 
         /// <summary>
@@ -29,10 +34,10 @@ namespace Panacea
         public Sam() : base(GameContent.GetAnimation(AnimationGroup.SamWalkDown))
         {
             //SET the Sam Object calling the method to the centre of the screen:
-            this.EntityLocn = new Vector2((Kernel.SCREEN_WIDTH / 2 - this.EntitySprite.TextureWidth / 2),
-                                          (Kernel.SCREEN_HEIGHT / 2 - this.EntitySprite.TextureHeight / 2));
+            this.EntityLocn = new Vector2(100,
+                                          100);
             // INITIALIZE moveSpeed to '5':
-            this.moveSpeed = 5;
+            this.moveSpeed = 2;
         }
 
         /// <summary>
@@ -41,6 +46,7 @@ namespace Panacea
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            lastPosition = EntityLocn;
             // MOVE the ball by it's X and Y speed:
             this.EntityLocn += entityVelocity;
         }
@@ -53,10 +59,11 @@ namespace Panacea
         /// <param name="collidee">The object that this object collided into.</param>
         public void CheckAndRespond(ICollidable collidee)
         {
-          
-               
-         //OnEntityTermination?.Invoke(this, new OnEntityTerminationEventArgs(this.UName, this.UID));
-
+            if(GameEntity.hasCollided(this,collidee))
+            {
+                Console.WriteLine(collidee);
+                entityLocn = lastPosition;
+            }
         }
         #endregion
         #region IMPLEMENTATION OF IInputListener

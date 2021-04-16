@@ -20,12 +20,14 @@ namespace Panacea
         protected Vector2 entityLocn;
         // DECLARE a reference to a Vector2 object, call it "entityVelocity". This is used to represent entityVelocity values of PongEntities:
         protected Vector2 entityVelocity;
+        // DECLARE a bool, call it isCollidable:
+        protected bool isCollidable;
         #endregion
 
         #region PROPERTIES
         public Rectangle HitBox // property
         {
-            get { return new Rectangle((int)this.entityLocn.X, (int)this.EntityLocn.Y, entitySprite.SpriteTexture.Width, entitySprite.SpriteTexture.Height); } //HitBox returns an appropriately sized hit box for the entity calling it, based on the entityPool location and size at the time of calling.
+            get { return new Rectangle((int)this.entityLocn.X, (int)this.EntityLocn.Y, (int)(entitySprite.TextureWidth*0.75), (int)(entitySprite.TextureHeight * 0.75)); } //HitBox returns an appropriately sized hit box for the entity calling it, based on the entityPool location and size at the time of calling.
         }
 
         public Sprite EntitySprite // property
@@ -54,6 +56,8 @@ namespace Panacea
         {
             // INITALIZE entityLocn to default 0,0:
             this.entityLocn = new Vector2(0,0);
+            // SET isCollidable to false as default:
+            this.isCollidable = false;
         }
 
         /// <summary>

@@ -25,3 +25,5 @@ D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.csproj.CopyComple
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.exe
 D:\Documents\Programming\Panacea\Panacea\obj\x86\Debug\Panacea.pdb
 D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\inner_tilesheet.xnb
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\Janice_Floor_Layer.csv
+D:\Documents\Programming\Panacea\Panacea\bin\Windows\x86\Debug\Content\Janice_Wall_Layer.csv

@@ -12,7 +12,7 @@ namespace Panacea.Game_Code.Game_Entities
     {
         #region FIELDS
         // DECLARE a Texture2D to store the sprites texture:
-        private Texture2D spriteTexture;
+        private Texture2D spriteSheetTexture;
         // DECLARE an int called xOrigin to store the x co-ordinate of the texture on the sprite sheet:
         private int xOrigin;
         // DECLARE an int called yOrigin to store the y co-ordinate of the texture on the sprite sheet:
@@ -24,10 +24,10 @@ namespace Panacea.Game_Code.Game_Entities
         #endregion
 
         #region PROPERTIES
-        public Texture2D SpriteTexture
+        public Texture2D SpriteSheetTexture
         {
-            get { return spriteTexture; } // get method
-            set { spriteTexture = value; } // set method
+            get { return spriteSheetTexture; } // get method
+            set { spriteSheetTexture = value; } // set method
         }
 
         public int TextureWidth
@@ -51,7 +51,7 @@ namespace Panacea.Game_Code.Game_Entities
         public Sprite(Texture2D spriteTexture, int xOrigin, int yOrigin, int textureWidth, int textureHeight)
         {
             // INITIALIZE fields:
-            this.spriteTexture = spriteTexture;
+            this.spriteSheetTexture = spriteTexture;
             this.xOrigin = xOrigin;
             this.yOrigin = yOrigin;
             this.textureWidth = textureWidth;
@@ -65,7 +65,7 @@ namespace Panacea.Game_Code.Game_Entities
         /// <param name="location">Where to draw the sprite on the SpriteBatch.</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            spriteBatch.Draw(spriteTexture, location, new Rectangle(xOrigin, yOrigin, textureWidth, textureHeight), Color.White);
+            spriteBatch.Draw(spriteSheetTexture, location, new Rectangle(xOrigin, yOrigin, textureWidth, textureHeight), Color.White);
         }
     }
         

@@ -8,6 +8,6 @@ namespace Panacea.Interfaces
 {
     public interface ICollidable
     {
-        // do nothing for now
+        bool IsCollidable { get; set; }
     }
 }

@@ -16,14 +16,6 @@ namespace Panacea
         SamWalkDown, SamWalkUp, SamWalkLeft, SamWalkRight
     }
     /// <summary>
-    /// Enum used to access specific Tile Sprites in the tileSprites Dictionary.
-    /// </summary>
-    public enum TileSpriteGroup
-    {
-        // DEFINE each Tiles Enums for the sprites:
-        HospitalFloorTile
-    }
-    /// <summary>
     /// Static class GameContent. Used to store all of the games images, sounds and font in one contained place.
     /// </summary>
     public static class GameContent
@@ -31,14 +23,24 @@ namespace Panacea
         #region FIELDS
         // DECLARE a static Texture2D, call it SamSpriteSheet:
         public static Texture2D SamSpriteSheet;
-        // DECLARE a static Texture2D, call it WorldTileSet:
-        public static Texture2D WorldTileSet;
+        // DECLARE a static Texture2D, call it WorldTileSheet:
+        public static Texture2D WorldTileSheet;
         // DECLARE a const int, call it DEFAULT_FRAMERATE and set it to 6fps:
         private const int DEFAULT_FRAMERATE = 6;
+        // DECLARE a const int, call it DEFAULT_TILE_WIDTH and set it to 16:
+        public const int DEFAULT_TILE_WIDTH = 16;
+        // DECLARE a const int, call it DEFAULT_TILE_HEIGHT and set it to 16:
+        public const int DEFAULT_TILE_HEIGHT = 16;
+        // DECLARE a const int, call it TILE_SHEET_WIDTH:
+        public const int TILE_SHEET_WIDTH = 352 / DEFAULT_TILE_WIDTH;
+        // DECLARE a const int, call it NUMBER_OF_TILES:
+        public const int NUMBER_OF_TILES = 397;
+
         // DECLARE a static Dictionary to store all of the games animations. Reference each element via the AnimationGroup enum:
         private static Dictionary<AnimationGroup, Animation> animations;
-        // DECLARE a stiatc Dictionary to store all tile Sprites. Reference each element via the TileSpriteGroup enum:
-        private static Dictionary<TileSpriteGroup, Sprite> tileSprites;
+        // DECLARE a stiatc Dictionary to store all Tile Sprites. Reference each one by an int id:
+        private static Dictionary<int, Sprite> tileSprites;
+
         #endregion
 
         /// <summary>
@@ -49,12 +51,12 @@ namespace Panacea
         {
             // INITALIZE Fields:
             animations = new Dictionary<AnimationGroup, Animation>();
-            tileSprites = new Dictionary<TileSpriteGroup, Sprite>();
+            tileSprites = new Dictionary<int, Sprite>();
 
             // LOAD Sams spritesheet:
             SamSpriteSheet = cm.Load<Texture2D>("sam_spritesheet");
-            // LOAD the world tileset
-            WorldTileSet = cm.Load<Texture2D>("inner_tilesheet");
+            // LOAD the World Tile Sheet:
+            WorldTileSheet = cm.Load<Texture2D>("inner_tilesheet");
 
             #region LOADING ANIMATIONS
             // LOAD Sam Walking Down:
@@ -68,9 +70,13 @@ namespace Panacea
             #endregion
 
             #region LOADING TILESPRITES
-            // LOAD the HospitalFloorTile:
-            LoadTileSprite(0, 0, 16, 16, TileSpriteGroup.HospitalFloorTile);
+            // LOAD the Tile Sprites:
+            for(int i=0; i < NUMBER_OF_TILES; i++)
+            {
+                ExtractTile(i);
+            }
 
+            
             #endregion
         }
         /// <summary>
@@ -102,12 +108,20 @@ namespace Panacea
             animations.Add(animationGroup, tempAnimation);
         }
 
-        private static void LoadTileSprite(int x, int y, int width, int height, TileSpriteGroup tileSpriteGroup)
+        private static void ExtractTile(int tileID)
+        {
+            int x = (tileID % TILE_SHEET_WIDTH) * DEFAULT_TILE_WIDTH;
+            int y = (tileID / TILE_SHEET_WIDTH) * DEFAULT_TILE_WIDTH;
+
+            LoadTileSprite(x, y, DEFAULT_TILE_WIDTH, DEFAULT_TILE_HEIGHT, tileID);
+        }
+
+        private static void LoadTileSprite(int x, int y, int width, int height, int tileID)
         {
             // CREATE a new Sprite, call it tempTileSprite and pass in the parameters:
-            Sprite tempTileSprite = new Sprite(WorldTileSet, x, y, width, height);
-            // ADD the tempTileSprite to the tileSprites, saving the name from the enum:
-            tileSprites.Add(tileSpriteGroup, tempTileSprite);
+            Sprite tempTileSprite = new Sprite(WorldTileSheet, x, y, width, height);
+            // ADD the tempTileSprite to the tileSprites, saving them with a tileID:
+            tileSprites.Add(tileID, tempTileSprite);
         }
 
         /// <summary>
@@ -121,9 +135,9 @@ namespace Panacea
             return animations[animationGroup];
         }
 
-        public static Sprite GetTileSprite(TileSpriteGroup tileSpriteGroup)
+        public static Sprite GetTileSprite(int tileID)
         {
-            return tileSprites[tileSpriteGroup];
+            return tileSprites[tileID];
         }
     }
 }

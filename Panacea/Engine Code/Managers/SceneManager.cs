@@ -11,6 +11,7 @@ namespace Panacea.Managers
         #region FIELDS
         // DECLARE a new 'List' storing 'IEntity' objects, call it 'sceneGraph':
         private List<IEntity> sceneGraph;
+        
         #endregion
 
         #region PROPERTIES

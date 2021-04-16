@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:inner_tilesheet.png
 
+#begin Janice_Floor_Layer.csv
+/copy:Janice_Floor_Layer.csv
+
+#begin Janice_Wall_Layer.csv
+/copy:Janice_Wall_Layer.csv
+
 #begin sam_spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
