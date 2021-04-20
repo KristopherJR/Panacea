@@ -1,20 +1,14 @@
-VERSION: 0.4.1, 16-04-2021
+VERSION: 0.4.2, 20-04-2021
 
 AUTHORS: Kristopher John Randle
 
 PATCH SUMMARY:
 
-Player can now make Sam sprint by pressing Shift. His animation changes when he is sprinting.
+Remodelled TileMap and made 3 seperate layers - Floor, Collidables and Objects. Rewrote HitBox login and implemented GetHitBox() in GameEntity.cs
 
 https://github.com/KristopherJR/Panacea
 
 PATCH NOTES:
 
-- Added 4 new Enums to AnimationGroup for Sams Sprint Animation
-- Loaded the 4 new animations in GameContent
-- Added a 'KeyOfInterest' to Sam - 'LeftShift'.
-- Added a bool, 'isSprintEnabled'
-- Added a bool, 'isSprintReleased'
-- Added Sprint logic and changed animation if Sam is sprinting.
 
 

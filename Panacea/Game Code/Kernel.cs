@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Panacea.Engine_Code.Camera;
 using Panacea.Game_Code;
+using Panacea.Game_Code.Game_Entities.Characters;
 
 namespace Panacea
 {
@@ -20,8 +21,9 @@ namespace Panacea
         // DECLARE a public static Boolean, call it 'running':
         public static Boolean running;
 
-        private const String TILE_MAP_FLOOR_PATH = "Content/Janice_Floor_Layer.csv";
-        private const String TILE_MAP_WALLS_PATH = "Content/Janice_Wall_Layer.csv";
+        private const String TILE_MAP_FLOOR_PATH = "Content/Janice_Floor Layer.csv";
+        private const String TILE_MAP_COLLISION_PATH = "Content/Janice_Collision Layer.csv";
+        private const String TILE_MAP_OBJECTS_PATH = "Content/Janice_Object Layer.csv";
 
         // DECLARE a GraphicsDeviceManager, call it 'graphics':
         private GraphicsDeviceManager graphics;
@@ -41,8 +43,10 @@ namespace Panacea
         private Camera camera;
         // DECLARE a TileMap, call it 'tileMapFloor':
         private TileMap tileMapFloor;
-        // DECLARE a TileMap, call it 'tileMapWalls':
-        private TileMap tileMapWalls;
+        // DECLARE a TileMap, call it 'tileMapCollisions':
+        private TileMap tileMapCollisions;
+        // DECLARE a TileMap, call it 'tileMapObjects':
+        private TileMap tileMapObjects;
 
         // DECLARE a public static int to represent the Screen Width, call it 'SCREEN_WIDTH':
         public static int SCREEN_WIDTH;
@@ -133,7 +137,8 @@ namespace Panacea
             GameContent.LoadContent(Content);
             // INITALIZE tilemaps:
             tileMapFloor = new TileMap(TILE_MAP_FLOOR_PATH, false);
-            tileMapWalls = new TileMap(TILE_MAP_WALLS_PATH, true);
+            tileMapCollisions = new TileMap(TILE_MAP_COLLISION_PATH, true);
+            tileMapObjects = new TileMap(TILE_MAP_OBJECTS_PATH, false);
             // SPAWN the game objects:
             this.SpawnObjects();
         }
@@ -145,11 +150,14 @@ namespace Panacea
         {
             // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
             IEntity sam = eManager.createEntity<Sam>();
+            // REQUEST a new 'Mary' object from the EntityManager, and pass it to the SceneManager:
+            IEntity mary = eManager.createEntity<Mary>();
+            // SPAWN sam into the 
             sManager.spawn(sam);
 
             // ADD IENTITY TILES TO SCENEGRAPH HERE
 
-            foreach (Tile t in tileMapWalls.GetTileMap())
+            foreach (Tile t in tileMapCollisions.GetTileMap())
             {
                 sManager.spawn(t);
             }
@@ -200,7 +208,8 @@ namespace Panacea
 
             // DRAW the TileMaps:
             tileMapFloor.DrawTileMap(spriteBatch);
-            tileMapWalls.DrawTileMap(spriteBatch);
+            tileMapCollisions.DrawTileMap(spriteBatch);
+            tileMapObjects.DrawTileMap(spriteBatch);
             // DRAW the Entities that are in the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {

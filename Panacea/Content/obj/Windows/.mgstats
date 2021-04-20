@@ -1,5 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Documents/Programming/Panacea/Panacea/Content/inner_tilesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/inner_tilesheet.xnb","TextureProcessor","Texture2DContent",16291,405589,0.2449213
-"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Floor_Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows\Janice_Floor_Layer.csv","CopyItem","File",5672,5672,0.005001
-"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Wall_Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows\Janice_Wall_Layer.csv","CopyItem","File",7835,7835,0.0009979
-"D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/sam_spritesheet.xnb","TextureProcessor","Texture2DContent",10873,278613,0.0119963
+"D:/Documents/Programming/Panacea/Panacea/Content/inner_tilesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/inner_tilesheet.xnb","TextureProcessor","Texture2DContent",16291,405589,0.1871999
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Collision Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows\Janice_Collision Layer.csv","CopyItem","File",8000,8000,0.0029955
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Floor Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows\Janice_Floor Layer.csv","CopyItem","File",5642,5642,0.0009983
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Object Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows\Janice_Object Layer.csv","CopyItem","File",7627,7627,0.0009985
+"D:/Documents/Programming/Panacea/Panacea/Content/mary_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/mary_spritesheet.xnb","TextureProcessor","Texture2DContent",1280,13141,0.0034943
+"D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/sam_spritesheet.xnb","TextureProcessor","Texture2DContent",10873,278613,0.0139774

@@ -1,5 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "D:/Documents/Programming/Panacea/Panacea/Content/inner_tilesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/inner_tilesheet.xnb","TextureProcessor","Texture2DContent",16291,405589,0.1613432
-"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Floor_Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content\Janice_Floor_Layer.csv","CopyItem","File",5672,5672,0.0030002
-"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Wall_Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content\Janice_Wall_Layer.csv","CopyItem","File",7835,7835,0.0009987
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Collision Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content\Janice_Collision Layer.csv","CopyItem","File",8000,8000,0.002995
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Floor Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content\Janice_Floor Layer.csv","CopyItem","File",5642,5642,0.0009986
+"D:/Documents/Programming/Panacea/Panacea/Content/Janice_Object Layer.csv","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content\Janice_Object Layer.csv","CopyItem","File",7627,7627,0.0009981
+"D:/Documents/Programming/Panacea/Panacea/Content/mary_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/mary_spritesheet.xnb","TextureProcessor","Texture2DContent",1280,13141,0.1409545
 "D:/Documents/Programming/Panacea/Panacea/Content/sam_spritesheet.png","D:/Documents/Programming/Panacea/Panacea/Content/bin/Windows/Content/sam_spritesheet.xnb","TextureProcessor","Texture2DContent",10873,278613,0.1639465

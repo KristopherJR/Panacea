@@ -12,9 +12,12 @@ namespace Panacea
     /// </summary>
     public enum AnimationGroup
     {
-        // DEFINE Sams Enums for his animations:
+        // DEFINE Sam's Enums for his animations:
         SamWalkDown, SamWalkUp, SamWalkLeft, SamWalkRight,
-        SamSprintDown, SamSprintUp, SamSprintRight, SamSprintLeft
+        SamSprintDown, SamSprintUp, SamSprintLeft, SamSprintRight,
+
+        // DEFINE Mary's Enums for her animations:
+        MaryWalkDown, MaryWalkUp, MaryWalkLeft, MaryWalkRight
     }
     /// <summary>
     /// Static class GameContent. Used to store all of the games images, sounds and font in one contained place.
@@ -24,6 +27,8 @@ namespace Panacea
         #region FIELDS
         // DECLARE a static Texture2D, call it SamSpriteSheet:
         public static Texture2D SamSpriteSheet;
+        // DECLARE a static Texture2D, call it SamSpriteSheet:
+        public static Texture2D MarySpriteSheet;
         // DECLARE a static Texture2D, call it WorldTileSheet:
         public static Texture2D WorldTileSheet;
         // DECLARE a const int, call it DEFAULT_FRAMERATE and set it to 6fps:
@@ -53,29 +58,44 @@ namespace Panacea
             animations = new Dictionary<AnimationGroup, Animation>();
             tileSprites = new Dictionary<int, Sprite>();
 
-            // LOAD Sams spritesheet:
+            // LOAD Sam's Spritesheet:
             SamSpriteSheet = cm.Load<Texture2D>("sam_spritesheet");
+            // LOAD Mary's Spritesheet:
+            MarySpriteSheet = cm.Load<Texture2D>("mary_spritesheet");
             // LOAD the World Tile Sheet:
             WorldTileSheet = cm.Load<Texture2D>("inner_tilesheet");
 
             #region LOADING ANIMATIONS
+            #region SAM ANIMATIONS
             // LOAD Sam Walking Down:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 6, 15, 22, 16, AnimationGroup.SamWalkDown);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 6, 15, 22, 16, 0, AnimationGroup.SamWalkDown);
             // LOAD Sam Walking Right:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 2, 38, 13, 22, 16, AnimationGroup.SamWalkRight);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 2, 38, 13, 22, 16, 0, AnimationGroup.SamWalkRight);
             // LOAD Sam Walking Up:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, AnimationGroup.SamWalkUp);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, 0, AnimationGroup.SamWalkUp);
             // LOAD Sam Walking Left:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, AnimationGroup.SamWalkLeft);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, 0, AnimationGroup.SamWalkLeft);
 
             // LOAD Sam Sprinting Down:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, AnimationGroup.SamSprintDown);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, 0, AnimationGroup.SamSprintDown);
             // LOAD Sam Sprinting Right:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, AnimationGroup.SamSprintRight);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, 0, AnimationGroup.SamSprintRight);
             // LOAD Sam Sprinting Up:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, AnimationGroup.SamSprintUp);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, 0, AnimationGroup.SamSprintUp);
             // LOAD Sam Sprinting Left:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, AnimationGroup.SamSprintLeft);
+            LoadAnimation(4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, 0, AnimationGroup.SamSprintLeft);
+            #endregion
+
+            #region MARY ANIMATIONS
+            // LOAD Mary Walking Down:
+            LoadAnimation(3, DEFAULT_FRAMERATE, 1, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkDown);
+            // LOAD Mary Walking Right:
+            LoadAnimation(3, DEFAULT_FRAMERATE, 17, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkRight);
+            // LOAD Mary Walking Up:
+            LoadAnimation(3, DEFAULT_FRAMERATE, 33, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkUp);
+            // LOAD Mary Walking Left:
+            LoadAnimation(3, DEFAULT_FRAMERATE, 51, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkLeft);
+            #endregion
             #endregion
 
             #region LOADING TILESPRITES
@@ -84,8 +104,6 @@ namespace Panacea
             {
                 ExtractTile(i);
             }
-
-            
             #endregion
         }
         /// <summary>
@@ -97,9 +115,10 @@ namespace Panacea
         /// <param name="y">The top left pixel origin of the texture on the spritesheet about the Y axis.</param>
         /// <param name="width">The width of the texture.</param>
         /// <param name="height">The height of the texture.</param>
-        /// <param name="spacer">The amount of pixels on the X axis between each frame on the spritesheet.</param>
+        /// <param name="xSpacer">The amount of pixels on the X axis between each frame on the spritesheet.</param>
+        /// <param name="ySpacer">The amount of pixels on the Y axis between each frame on the spritesheet.</param>
         /// <param name="animationGroup">A reference to the enum storing the names of each entityAnimation. Used when retrieving animations from the Dictionary.</param>
-        private static void LoadAnimation(int numberOfFrames, int frameRate, int x, int y, int width, int height, int spacer, AnimationGroup animationGroup)
+        private static void LoadAnimation(int numberOfFrames, int frameRate, int x, int y, int width, int height, int xSpacer, int ySpacer, AnimationGroup animationGroup)
         {
             // CREATE a new entityAnimation, call it tempAnimation and pass in the frameRate:
             Animation tempAnimation = new Animation(frameRate);
@@ -108,7 +127,7 @@ namespace Panacea
             for (int i = 0; i < numberOfFrames; i++)
             {
                 // CREATE a new sprite and call it tempFrame. Pass in the spritesheet and other parameters:
-                Sprite tempFrame = new Sprite(SamSpriteSheet, ((i * spacer) + x), y, width, height);
+                Sprite tempFrame = new Sprite(SamSpriteSheet, ((i * xSpacer) + x), (i * ySpacer) + y, width, height);
                 // ADD the tempFrame to the tempAnimation:
                 tempAnimation.AddFrame(tempFrame);
             }

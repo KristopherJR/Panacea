@@ -39,14 +39,15 @@ namespace Panacea
         public Sam() : base(GameContent.GetAnimation(AnimationGroup.SamWalkDown))
         {
             // SET Sams location in the world:
-            this.EntityLocn = new Vector2(100,
-                                          100);
+            this.EntityLocn = new Vector2(100,100);
             // INITIALIZE moveSpeed to '1.5f':
             this.moveSpeed = 1.5f;
             // SET isSprintEnabled to false as default:
             this.isSprintEnabled = false;
             // SET isSprintReleased to true as default:
             this.isSprintReleased = true;
+            // SET isCharacter to true:
+            this.isCharacter = true;
         }
 
         /// <summary>
@@ -62,7 +63,6 @@ namespace Panacea
             // MOVE Sam by his velocity:
             this.EntityLocn += entityVelocity;
         }
-
 
         #region IMPLEMENTATION OF ICollisionResponder
         /// <summary>

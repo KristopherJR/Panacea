@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Panacea.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Panacea.Game_Code.Game_Entities;
 
 namespace Panacea
@@ -22,14 +17,11 @@ namespace Panacea
         protected Vector2 entityVelocity;
         // DECLARE a bool, call it isCollidable:
         protected bool isCollidable;
+        // DECLARE a bool, call it isCharacter:
+        protected bool isCharacter;
         #endregion
 
         #region PROPERTIES
-        public Rectangle HitBox // property
-        {
-            get { return new Rectangle((int)this.entityLocn.X, (int)this.EntityLocn.Y, (int)(entitySprite.TextureWidth*0.75), (int)(entitySprite.TextureHeight * 0.75)); } //HitBox returns an appropriately sized hit box for the entity calling it, based on the entityPool location and size at the time of calling.
-        }
-
         public Sprite EntitySprite // property
         {
             get { return entitySprite; } // get method
@@ -58,6 +50,8 @@ namespace Panacea
             this.entityLocn = new Vector2(0,0);
             // SET isCollidable to false as default:
             this.isCollidable = false;
+            // SET isCharacter to false as default:
+            this.isCharacter = false;
         }
 
         /// <summary>
@@ -78,7 +72,7 @@ namespace Panacea
         public static Boolean hasCollided(ICollidable collider, ICollidable colidee)
         {
             // IF the ICollidables HitBox's intersect:
-            if ((collider as GameEntity).HitBox.Intersects((colidee as GameEntity).HitBox))
+            if ((collider as GameEntity).GetHitBox().Intersects((colidee as GameEntity).GetHitBox()))
             {
                 // RETURN true:
                 return true;
@@ -87,6 +81,33 @@ namespace Panacea
             {
                 // ELSE return false:
                 return false;
+            }
+        }
+
+        private Rectangle GetHitBox()
+        {
+            // DECLARE a Rectangle, call it 'newHitBox':
+            Rectangle newHitBox;
+            // IF the GameEntity is a Character:
+            if(isCharacter == true)
+            {
+                // CALCULATE an appropriate HitBox, I.E one that is slightly smaller than the entity texture:
+                newHitBox = new Rectangle((int)(this.EntityLocn.X + (this.EntitySprite.TextureWidth * 0.15)), 
+                                          (int)(this.EntityLocn.Y + (this.EntitySprite.TextureHeight * 0.4)),
+                                          (int)(this.EntitySprite.TextureWidth * 0.70),
+                                          (int)(this.EntitySprite.TextureHeight * 0.60));
+                // RETURN the newHitBox:
+                return newHitBox;
+            }
+            else
+            {
+                // CALCULATE a HitBox that fills the entire entity:
+                newHitBox = new Rectangle((int)(this.EntityLocn.X),
+                                          (int)(this.EntityLocn.Y),
+                                          (int)(this.EntitySprite.TextureWidth * 0.75),
+                                          (int)(this.EntitySprite.TextureHeight * 0.75));
+                // RETURN the newHitBox:
+                return newHitBox;
             }
         }
     }
