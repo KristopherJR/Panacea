@@ -68,33 +68,33 @@ namespace Panacea
             #region LOADING ANIMATIONS
             #region SAM ANIMATIONS
             // LOAD Sam Walking Down:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 6, 15, 22, 16, 0, AnimationGroup.SamWalkDown);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 1, 6, 15, 22, 16, 0, AnimationGroup.SamWalkDown);
             // LOAD Sam Walking Right:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 2, 38, 13, 22, 16, 0, AnimationGroup.SamWalkRight);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 2, 38, 13, 22, 16, 0, AnimationGroup.SamWalkRight);
             // LOAD Sam Walking Up:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, 0, AnimationGroup.SamWalkUp);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, 0, AnimationGroup.SamWalkUp);
             // LOAD Sam Walking Left:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, 0, AnimationGroup.SamWalkLeft);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, 0, AnimationGroup.SamWalkLeft);
 
             // LOAD Sam Sprinting Down:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, 0, AnimationGroup.SamSprintDown);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, 0, AnimationGroup.SamSprintDown);
             // LOAD Sam Sprinting Right:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, 0, AnimationGroup.SamSprintRight);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, 0, AnimationGroup.SamSprintRight);
             // LOAD Sam Sprinting Up:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, 0, AnimationGroup.SamSprintUp);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, 0, AnimationGroup.SamSprintUp);
             // LOAD Sam Sprinting Left:
-            LoadAnimation(4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, 0, AnimationGroup.SamSprintLeft);
+            LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, 0, AnimationGroup.SamSprintLeft);
             #endregion
 
             #region MARY ANIMATIONS
             // LOAD Mary Walking Down:
-            LoadAnimation(3, DEFAULT_FRAMERATE, 1, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkDown);
+            LoadAnimation(MarySpriteSheet, 3, 5, 1, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkDown);
             // LOAD Mary Walking Right:
-            LoadAnimation(3, DEFAULT_FRAMERATE, 17, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkRight);
+            LoadAnimation(MarySpriteSheet, 3, 5, 17, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkRight);
             // LOAD Mary Walking Up:
-            LoadAnimation(3, DEFAULT_FRAMERATE, 33, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkUp);
+            LoadAnimation(MarySpriteSheet, 3, 5, 33, 2, 14, 15, 0, 17, AnimationGroup.MaryWalkUp);
             // LOAD Mary Walking Left:
-            LoadAnimation(3, DEFAULT_FRAMERATE, 51, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkLeft);
+            LoadAnimation(MarySpriteSheet, 3, 5, 51, 2, 12, 15, 0, 17, AnimationGroup.MaryWalkLeft);
             #endregion
             #endregion
 
@@ -109,6 +109,7 @@ namespace Panacea
         /// <summary>
         /// Called from inside this classes constructor. Creates and loads animations.
         /// </summary>
+        /// <param name="spriteSheet">The Texture2D SpriteSheet containing the .png file for the animation.</param>
         /// <param name="numberOfFrames">The amount of individual frames in the entityAnimation.</param>
         /// <param name="frameRate">The rate at which the entityAnimation plays in Frames per Second.</param>
         /// <param name="x">The top left pixel origin of the texture on the spritesheet about the X axis.</param>
@@ -118,7 +119,7 @@ namespace Panacea
         /// <param name="xSpacer">The amount of pixels on the X axis between each frame on the spritesheet.</param>
         /// <param name="ySpacer">The amount of pixels on the Y axis between each frame on the spritesheet.</param>
         /// <param name="animationGroup">A reference to the enum storing the names of each entityAnimation. Used when retrieving animations from the Dictionary.</param>
-        private static void LoadAnimation(int numberOfFrames, int frameRate, int x, int y, int width, int height, int xSpacer, int ySpacer, AnimationGroup animationGroup)
+        private static void LoadAnimation(Texture2D spriteSheet, int numberOfFrames, int frameRate, int x, int y, int width, int height, int xSpacer, int ySpacer, AnimationGroup animationGroup)
         {
             // CREATE a new entityAnimation, call it tempAnimation and pass in the frameRate:
             Animation tempAnimation = new Animation(frameRate);
@@ -127,7 +128,7 @@ namespace Panacea
             for (int i = 0; i < numberOfFrames; i++)
             {
                 // CREATE a new sprite and call it tempFrame. Pass in the spritesheet and other parameters:
-                Sprite tempFrame = new Sprite(SamSpriteSheet, ((i * xSpacer) + x), (i * ySpacer) + y, width, height);
+                Sprite tempFrame = new Sprite(spriteSheet, ((i * xSpacer) + x), ((i * ySpacer) + y), width, height);
                 // ADD the tempFrame to the tempAnimation:
                 tempAnimation.AddFrame(tempFrame);
             }

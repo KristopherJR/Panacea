@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Panacea.Engine_Code.Interfaces;
 using Panacea.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace Panacea.Game_Code.Game_Entities.Characters
 {
-    class Mary : AnimatedEntity, ICollidable, ICollisionResponder
+    class Mary : AnimatedEntity, ICollidable, ICollisionResponder, IPathFinder
     {
         #region FIELDS
-        // DECLARE a float, call it 'moveSpeed':
-        private float moveSpeed;
         // DECLARE a Vector2, call it 'lastPosition'. Used to keep track of Mary's position and reset her if she collides with something:
         private Vector2 lastPosition;
         #endregion
@@ -26,10 +25,10 @@ namespace Panacea.Game_Code.Game_Entities.Characters
 
         public Mary() : base(GameContent.GetAnimation(AnimationGroup.MaryWalkDown))
         {
-            // SET Sams location in the world:
+            // SET Mary's location in the world:
             this.EntityLocn = new Vector2(150,150);
-            // INITIALIZE moveSpeed to '1':
-            this.moveSpeed = 1;
+            // SET her Velocity:
+            this.entityVelocity = new Vector2(1, 1);
         }
 
         /// <summary>

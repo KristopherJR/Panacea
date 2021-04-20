@@ -1,14 +1,23 @@
-VERSION: 0.4.2, 20-04-2021
+VERSION: 0.5.2, 20-04-2021
 
 AUTHORS: Kristopher John Randle
 
+
+
 PATCH SUMMARY:
 
-Remodelled TileMap and made 3 seperate layers - Floor, Collidables and Objects. Rewrote HitBox login and implemented GetHitBox() in GameEntity.cs
+Added Mary to the world. Added a NavigationManager.
 
 https://github.com/KristopherJR/Panacea
 
 PATCH NOTES:
 
-
+- Added Mary to the World.
+- Added a new Parameter to GameContent.LoadAnimation(), Texture2D spriteSheet. This allows any animation from any SpriteSheet.png to be loaded.
+- Added a new class, NavigationManager
+- Added a new interface, INavigationManager
+- Added a new interface, IPathFinder
+- Made Mary implement IPathFinder
+- Added a List<IPathFinder> pathFinders to NavigationManager.
+- Implemented logic to select a random destination tile from the TileMap.
 

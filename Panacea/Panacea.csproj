@@ -66,8 +66,11 @@
     <Compile Include="Engine Code\Interfaces\IKeyboardInput.cs" />
     <Compile Include="Engine Code\Interfaces\IMouseInput.cs" />
     <Compile Include="Engine Code\Interfaces\IInputPublisher.cs" />
+    <Compile Include="Engine Code\Interfaces\INavigationManager.cs" />
+    <Compile Include="Engine Code\Interfaces\IPathFinder.cs" />
     <Compile Include="Engine Code\Interfaces\IUpdatable.cs" />
     <Compile Include="Engine Code\Managers\CollisionManager.cs" />
+    <Compile Include="Engine Code\Managers\NavigationManager.cs" />
     <Compile Include="Engine Code\UserEventArgs\OnMouseInputEventArgs.cs" />
     <Compile Include="Engine Code\Entities\Animation.cs" />
     <Compile Include="Engine Code\Entities\AnimatedEntity.cs" />

@@ -152,8 +152,10 @@ namespace Panacea
             IEntity sam = eManager.createEntity<Sam>();
             // REQUEST a new 'Mary' object from the EntityManager, and pass it to the SceneManager:
             IEntity mary = eManager.createEntity<Mary>();
-            // SPAWN sam into the 
+            // SPAWN sam into the SceneGraph:
             sManager.spawn(sam);
+            // SPAWN mary into the SceneGraph:
+            sManager.spawn(mary);
 
             // ADD IENTITY TILES TO SCENEGRAPH HERE
 
