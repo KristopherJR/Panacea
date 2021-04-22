@@ -1,4 +1,4 @@
-VERSION: 0.61, 22-04-2021
+VERSION: 0.62, 22-04-2021
 
 AUTHORS: Kristopher John Randle
 
@@ -6,20 +6,10 @@ AUTHORS: Kristopher John Randle
 
 PATCH SUMMARY:
 
-Fixed A* Algorithm, Mary now navigates to a tile at a normal rate and doesn't disappear.
+Made the NPCs wait 5 seconds before pathing to a new tile.
 
 https://github.com/KristopherJR/Panacea
 
 PATCH NOTES:
 
-- Added Mary to the World.
-- Added a new Parameter to GameContent.LoadAnimation(), Texture2D spriteSheet. This allows any animation from any SpriteSheet.png to be loaded.
-- Added a new class, NavigationManager
-- Added a new interface, INavigationManager
-- Added a new interface, IPathFinder
-- Made Mary implement IPathFinder
-- Added a List<IPathFinder> pathFinders to NavigationManager.
-- Implemented logic to select a random destination tile from the TileMap.
-- Implemented A* Algorithm
-- Made Mary receive a path from the Navigation Manager and follow it.
 

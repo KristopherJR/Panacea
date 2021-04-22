@@ -17,6 +17,9 @@ namespace Panacea.Game_Code.Game_Entities.Characters
         private Vector2 lastPosition;
         private int i;
         private float speed;
+        private float idleTimer;
+        private float waitDuration;
+        private bool isWaiting;
         #endregion
         #region PROPERTIES
         public List<Vector2> Path
@@ -37,6 +40,9 @@ namespace Panacea.Game_Code.Game_Entities.Characters
             path = new List<Vector2>();
             speed = 1;
             i = 0;
+            idleTimer = 0.0f;
+            waitDuration = 5.0f;
+            isWaiting = false;
             // SET NPC's location in the world:
             this.EntityLocn = new Vector2(150,150);
         }
@@ -68,6 +74,7 @@ namespace Panacea.Game_Code.Game_Entities.Characters
                     entityVelocity = Vector2.Zero;
                     path = null;
                     i = 0;
+                    isWaiting = true;
                 }
             } 
         }
@@ -81,7 +88,20 @@ namespace Panacea.Game_Code.Game_Entities.Characters
             // UPDATE the parent class:
             base.Update(gameTime);
 
-            this.FollowPath(gameTime);    
+            if(isWaiting == false)
+            {
+                this.FollowPath(gameTime);
+            }
+            if(isWaiting)
+            {
+                idleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if(idleTimer >= waitDuration)
+                {
+                    isWaiting = false;
+                    idleTimer = 0.0f;
+                }
+            }
+            
         }
 
         #region IMPLEMENTATION of ICollisionResponder

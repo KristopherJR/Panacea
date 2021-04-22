@@ -13,9 +13,6 @@ namespace Panacea.Engine_Code.Managers
         private TileMap navigationGrid;
         // DECLARE a List<IPathFinder>, call it pathFinders. This will hold all A.I entities that navigate the world by themselves:
         private List<IPathFinder> pathFinders;
-        // DECLARE a float, call it idleTimer. Used to make the entity wait before moving to the next tile:
-        private float idleTimer;
-
         #endregion
 
         #region PROPERTIES
@@ -35,8 +32,6 @@ namespace Panacea.Engine_Code.Managers
         {
             // INITIALIZE fields:
             this.pathFinders = new List<IPathFinder>();
-            this.idleTimer = 5.0f;
-
         }
 
         #region IMPLEMENTATION OF INavigationManager
