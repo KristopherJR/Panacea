@@ -23,16 +23,6 @@ namespace Panacea.Engine_Code.Interfaces
         /// <param name="pathFinder">The IPathFinder to add to the NavigationManager.</param>
         void RemovePathFinder(IPathFinder pathFinder);
         /// <summary>
-        /// Calculates a destination tile from the NavigationGrid and returns the x,y location as a Vector2.
-        /// </summary>
-        /// <returns>A Vector2 with x,y values of the location to navigate to.</returns>
-        Vector2 FindDestinationTile();
-        /// <summary>
-        /// Calculates the navigation path for the IPathFinder.
-        /// </summary>
-        /// <returns>The navigation path for the IPathFinder.</returns>
-        Vector2 CalculateNavigationPath();
-        /// <summary>
         /// Default Update loop.
         /// </summary>
         /// <param name="gameTime">A Snapshot of the GameTime.</param>

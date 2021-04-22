@@ -12,7 +12,7 @@ namespace Panacea
     /// </summary>
     public enum AnimationGroup
     {
-        // DEFINE Sam's Enums for his animations:
+        // DEFINE Player's Enums for his animations:
         SamWalkDown, SamWalkUp, SamWalkLeft, SamWalkRight,
         SamSprintDown, SamSprintUp, SamSprintLeft, SamSprintRight,
 
@@ -58,7 +58,7 @@ namespace Panacea
             animations = new Dictionary<AnimationGroup, Animation>();
             tileSprites = new Dictionary<int, Sprite>();
 
-            // LOAD Sam's Spritesheet:
+            // LOAD Player's Spritesheet:
             SamSpriteSheet = cm.Load<Texture2D>("sam_spritesheet");
             // LOAD Mary's Spritesheet:
             MarySpriteSheet = cm.Load<Texture2D>("mary_spritesheet");
@@ -67,22 +67,22 @@ namespace Panacea
 
             #region LOADING ANIMATIONS
             #region SAM ANIMATIONS
-            // LOAD Sam Walking Down:
+            // LOAD Player Walking Down:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 1, 6, 15, 22, 16, 0, AnimationGroup.SamWalkDown);
-            // LOAD Sam Walking Right:
+            // LOAD Player Walking Right:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 2, 38, 13, 22, 16, 0, AnimationGroup.SamWalkRight);
-            // LOAD Sam Walking Up:
+            // LOAD Player Walking Up:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 0, 69, 15, 23, 16, 0, AnimationGroup.SamWalkUp);
-            // LOAD Sam Walking Left:
+            // LOAD Player Walking Left:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 1, 102, 13, 22, 16, 0, AnimationGroup.SamWalkLeft);
 
-            // LOAD Sam Sprinting Down:
+            // LOAD Player Sprinting Down:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 144, 6, 16, 22, 16, 0, AnimationGroup.SamSprintDown);
-            // LOAD Sam Sprinting Right:
+            // LOAD Player Sprinting Right:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 146, 38, 14, 22, 16, 0, AnimationGroup.SamSprintRight);
-            // LOAD Sam Sprinting Up:
+            // LOAD Player Sprinting Up:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 144, 69, 16, 23, 16, 0, AnimationGroup.SamSprintUp);
-            // LOAD Sam Sprinting Left:
+            // LOAD Player Sprinting Left:
             LoadAnimation(SamSpriteSheet, 4, DEFAULT_FRAMERATE, 145, 102, 13, 22, 16, 0, AnimationGroup.SamSprintLeft);
             #endregion
 

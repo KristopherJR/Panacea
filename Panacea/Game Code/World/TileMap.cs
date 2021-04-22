@@ -73,6 +73,11 @@ namespace Panacea.Game_Code
             }
         }
 
+        public Tile GetTileAtIndex(int xIndex, int yIndex)
+        {
+            return tileMap[xIndex, yIndex];
+        }
+
         public void DrawTileMap(SpriteBatch spriteBatch)
         {
             foreach (Tile t in tileMap)

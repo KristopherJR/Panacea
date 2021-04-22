@@ -45,11 +45,11 @@ namespace Panacea.Managers
             newEntity.UID = idCounter;
             // INCREMENT the idCounter:
             idCounter++;
-            // STORE that new 'Sam' in the entityPool reference List:
+            // STORE that new 'Player' in the entityPool reference List:
             entityPool.Add(newEntity);
             // SET a unique name:
             this.setUniqueName(newEntity);
-            // RETURN the new 'Sam' object to the caller as an 'IEntity':
+            // RETURN the new 'Player' object to the caller as an 'IEntity':
             return newEntity;
         }
 
@@ -82,33 +82,33 @@ namespace Panacea.Managers
             // DECLARE an int called 'tempCounter' and set it to '0':
             int tempCounter = 0;
 
-            // CHECK if the IEntity passed in is a 'Sam' object:
-            if (e is Sam)
+            // CHECK if the IEntity passed in is a 'Player' object:
+            if (e is Player)
             {
-                // STEP-THROUGH the 'entityPool' List for each 'Sam':
+                // STEP-THROUGH the 'entityPool' List for each 'Player':
                 for(int i=0;i<entityPool.Count;i++)
                 {
-                    if (entityPool[i] is Sam)
+                    if (entityPool[i] is Player)
                     {
-                        // INCREASE the 'tempCounter' for each 'Sam':
+                        // INCREASE the 'tempCounter' for each 'Player':
                         tempCounter++;
                     }
                 }
-                // STEP-THROUGH the 'entityPool' List again for each 'Sam':
+                // STEP-THROUGH the 'entityPool' List again for each 'Player':
                 for(int i= 0; i < entityPool.Count; i++)
                 {
-                    if(entityPool[i] is Sam)
+                    if(entityPool[i] is Player)
                     {
                         // CHECK that the name isn't already being used:
-                        if (entityPool[i].UName == ("Sam" + tempCounter))
+                        if (entityPool[i].UName == ("Player" + tempCounter))
                         {
                             // IF the name is being used, increase the counter again:
                             tempCounter++;
                         }
                     }  
                 }
-                // SET the entityPool name to "Sam" plus the 'tempCounter':
-                e.UName = ("Sam" + tempCounter);
+                // SET the entityPool name to "Player" plus the 'tempCounter':
+                e.UName = ("Player" + tempCounter);
             }
         }
     }

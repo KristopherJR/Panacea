@@ -8,7 +8,7 @@ using System;
 
 namespace Panacea
 {
-    public class Sam : AnimatedEntity, ICollidable, ICollisionResponder, IInputListener
+    public class Player : AnimatedEntity, ICollidable, ICollisionResponder, IInputListener
     {
         #region FIELDS
         // DECLARE a float, call it 'moveSpeed':
@@ -34,9 +34,9 @@ namespace Panacea
         #endregion
 
         /// <summary>
-        /// Constructor for objects of class Sam.
+        /// Constructor for objects of class Player.
         /// </summary>
-        public Sam() : base(GameContent.GetAnimation(AnimationGroup.SamWalkDown))
+        public Player() : base(GameContent.GetAnimation(AnimationGroup.SamWalkDown))
         {
             // SET Sams location in the world:
             this.EntityLocn = new Vector2(100,100);
@@ -51,7 +51,7 @@ namespace Panacea
         }
 
         /// <summary>
-        /// Update loop for Sam, overrides the parent Update() method. Stores his lastPosition before moving him on each update loop.
+        /// Update loop for Player, overrides the parent Update() method. Stores his lastPosition before moving him on each update loop.
         /// </summary>
         /// <param name="gameTime">A snapshot of the GameTime.</param>
         public override void Update(GameTime gameTime)
@@ -60,7 +60,7 @@ namespace Panacea
             base.Update(gameTime);
             // STORE Sams last position as his current one before he moves:
             lastPosition = EntityLocn;
-            // MOVE Sam by his velocity:
+            // MOVE Player by his velocity:
             this.EntityLocn += entityVelocity;
         }
 

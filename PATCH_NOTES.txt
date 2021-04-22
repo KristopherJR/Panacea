@@ -1,4 +1,4 @@
-VERSION: 0.5.2, 20-04-2021
+VERSION: 0.6, 22-04-2021
 
 AUTHORS: Kristopher John Randle
 
@@ -6,7 +6,8 @@ AUTHORS: Kristopher John Randle
 
 PATCH SUMMARY:
 
-Added Mary to the world. Added a NavigationManager.
+Implemented the A* Navigation Algorithm in the NavigationManager. Mary now selects a random tile and finds a path
+to it. Hilarious state where she zooms.
 
 https://github.com/KristopherJR/Panacea
 
@@ -20,4 +21,6 @@ PATCH NOTES:
 - Made Mary implement IPathFinder
 - Added a List<IPathFinder> pathFinders to NavigationManager.
 - Implemented logic to select a random destination tile from the TileMap.
+- Implemented A* Algorithm
+- Made Mary receive a path from the Navigation Manager and follow it.
 

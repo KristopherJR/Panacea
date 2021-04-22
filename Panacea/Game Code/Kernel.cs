@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using Panacea.Engine_Code.Camera;
 using Panacea.Game_Code;
 using Panacea.Game_Code.Game_Entities.Characters;
+using Panacea.Engine_Code.Interfaces;
+using Panacea.Engine_Code.Managers;
 
 namespace Panacea
 {
@@ -38,6 +40,8 @@ namespace Panacea
         private ICollisionManager cManager;
         // DECLARE an InputManager, call it 'iManager'. Store it as its interface IInputManager:
         private IInputManager iManager;
+        // DECLARE an NavigationManager, call it 'nManager'. Store it as its interface INavigationManager:
+        private INavigationManager nManager;
 
         // DECLARE a Camera, call it 'camera':
         private Camera camera;
@@ -86,6 +90,7 @@ namespace Panacea
             sManager = new SceneManager();
             cManager = new CollisionManager();
             iManager = new InputManager();
+            nManager = new NavigationManager();
 
             // INITIALIZE the camera:
             camera = new Camera(GraphicsDevice.Viewport);
@@ -100,14 +105,14 @@ namespace Panacea
         }
 
         /// <summary>
-        /// Event handler for the event OnEntityTermination, fired from the Sam class. This will be triggered each time a Sam goes out of play (touches the right or left wall).
+        /// Event handler for the event OnEntityTermination, fired from the Player class. This will be triggered each time a Player goes out of play (touches the right or left wall).
         /// </summary>
         /// <param name="sender">The object sending the event.</param>
         /// <param name="eventInformation">Details about the event.</param>
         private void OnEntityTermination(object sender, OnEntityTerminationEventArgs eventInformation)
         {
-            // UNSUBSCRIBE from the event published by the Sam about to be terminated:
-            (sender as Sam).OnEntityTermination -= OnEntityTermination;
+            // UNSUBSCRIBE from the event published by the Player about to be terminated:
+            (sender as Player).OnEntityTermination -= OnEntityTermination;
             // REMOVE the entity from the Collision Manager:
             cManager.removeCollidable(eventInformation.EntityUName, eventInformation.EntityUID);
             // DESPAWN the entity from the Scene Manager:
@@ -115,14 +120,14 @@ namespace Panacea
             // DESTROY the entity in the Entity Manager:
             eManager.destroyEntity(eventInformation.EntityUName, eventInformation.EntityUID);
 
-            // CREATE a new 'Sam' object with the EntityManager:
-            IEntity newBall = eManager.createEntity<Sam>();
+            // CREATE a new 'Player' object with the EntityManager:
+            IEntity newBall = eManager.createEntity<Player>();
             // SPAWN the entity into the SceneGraph:
             sManager.spawn(newBall);
             // ADD the entity to the CollisionManager:
             cManager.addCollidable((newBall as ICollidable));
             // SUBSCIRBE to the termination event that newBall publishes:
-            (newBall as Sam).OnEntityTermination += OnEntityTermination;
+            (newBall as Player).OnEntityTermination += OnEntityTermination;
         }
         
         /// <summary>
@@ -148,10 +153,10 @@ namespace Panacea
         /// </summary>
         private void SpawnObjects()
         {
-            // REQUEST a new 'Sam' object from the EntityManager, and pass it to the SceneManager:
-            IEntity sam = eManager.createEntity<Sam>();
+            // REQUEST a new 'Player' object from the EntityManager, and pass it to the SceneManager:
+            IEntity sam = eManager.createEntity<Player>();
             // REQUEST a new 'Mary' object from the EntityManager, and pass it to the SceneManager:
-            IEntity mary = eManager.createEntity<Mary>();
+            IEntity mary = eManager.createEntity<NPC>();
             // SPAWN sam into the SceneGraph:
             sManager.spawn(sam);
             // SPAWN mary into the SceneGraph:
@@ -165,27 +170,30 @@ namespace Panacea
             }
 
 
-            // SET camera focus onto Sam:
+            // SET camera focus onto Player:
             camera.SetFocus(sam as GameEntity);
             
 
             // ITERATE through the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
-                if (sManager.SceneGraph[i] is Sam)
+                if (sManager.SceneGraph[i] is Player)
                 {
-                    // SUBSCRIBE to the event that is published in the Sam:
-                    (sManager.SceneGraph[i] as Sam).OnEntityTermination += OnEntityTermination;
+                    // SUBSCRIBE to the event that is published in the Player:
+                    (sManager.SceneGraph[i] as Player).OnEntityTermination += OnEntityTermination;
                     // SUBSCRIBE the paddle to listen for input events and key release events:
                     iManager.Subscribe((sManager.SceneGraph[0] as IInputListener),
-                                       (sManager.SceneGraph[0] as Sam).OnNewInput,
-                                       (sManager.SceneGraph[0] as Sam).OnKeyReleased,
-                                       (sManager.SceneGraph[0] as Sam).OnNewMouseInput);
+                                       (sManager.SceneGraph[0] as Player).OnNewInput,
+                                       (sManager.SceneGraph[0] as Player).OnKeyReleased,
+                                       (sManager.SceneGraph[0] as Player).OnNewMouseInput);
                 }
             }
 
             // POPULATE the CollisionManagers collidables List with objects from the Scene Graph:
             cManager.PopulateCollidables(sManager.SceneGraph);
+            // PASS a reference to the collision tile map to the NavigationManager:
+            nManager.NavigationGrid = tileMapCollisions;
+            nManager.AddPathFinder(mary as IPathFinder);
         }
         /// <summary>
         /// Unloads game content.
@@ -244,10 +252,13 @@ namespace Panacea
             {
                 // UPDATE the CollisionManager first:
                 cManager.update();
+                // UPDATE the NavigationManager:
+                nManager.Update(gameTime);
                 // THEN Update the SceneManager:
                 sManager.Update(gameTime);
                 // UPDATE the InputManager:
                 iManager.update();
+                
                 // UPDATE the Camera:
                 camera.Update(gameTime);
 
