@@ -81,7 +81,7 @@ namespace Panacea.Engine_Code.Camera
         public void OnNewMouseInput(object sender, OnMouseInputEventArgs eventInformation)
         {
             zoomAspect += eventInformation.ScrollValue * scrollSpeed;
-            Console.WriteLine(zoomAspect);
+            //Console.WriteLine(zoomAspect);
         }
 
         public Keys[] getKOI()

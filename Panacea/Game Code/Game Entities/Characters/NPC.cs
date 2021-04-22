@@ -17,7 +17,6 @@ namespace Panacea.Game_Code.Game_Entities.Characters
         private Vector2 lastPosition;
         private int i;
         private float speed;
-        private float progress;
         #endregion
         #region PROPERTIES
         public List<Vector2> Path
@@ -46,18 +45,27 @@ namespace Panacea.Game_Code.Game_Entities.Characters
         {
             if(i < path.Count)
             {
-                Vector2 newVelocity = this.entityLocn - path[i];
-                newVelocity.Normalize();
-                newVelocity *= speed;
-                this.entityVelocity = newVelocity;
-                this.EntityLocn = path[i];//entityVelocity;
+                Vector2 location = this.EntityLocn;
+                Vector2 direction = path[i] - this.EntityLocn;
+
+                if(direction.Length() > 0)
+                {
+                    direction.Normalize();
+                }
+
+                Vector2 newVelocity = direction * speed;
+
+                this.EntityLocn += newVelocity;
+
 
                 if (Vector2.Distance(this.entityLocn, path[i]) < 0.5)
                 {
                     i++;
                 }
+
                 if(i == path.Count)
                 {
+                    entityVelocity = Vector2.Zero;
                     path = null;
                     i = 0;
                 }
@@ -73,8 +81,7 @@ namespace Panacea.Game_Code.Game_Entities.Characters
             // UPDATE the parent class:
             base.Update(gameTime);
 
-            this.FollowPath(gameTime);
-            
+            this.FollowPath(gameTime);    
         }
 
         #region IMPLEMENTATION of ICollisionResponder
