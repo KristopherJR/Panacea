@@ -9,7 +9,7 @@ In the cold, autumn months of 1894 – Sam, a trainee doctor joins the ranks of 
 <h3>Version 0.7</h3>
 Version 0.7 sees the final version that will be used for COMP2451 Final Milestone submission. The game will still be worked on past this point, but this is what was submitted. The game in it's current state features the following mechanics/features:
 
-<br>1 -	Walking with W, A, S, D <n
+<br>1 -	Walking with W, A, S, D
 <br>2	- Animated Sprites
 <br>3	- Spawning a world with a TileMap, with separate collidable and non-collidable layers
 <br>4 -	Player Token colliding with Walls and other Entities
