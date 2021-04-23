@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Panacea.Engine_Code.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Panacea.Engine_Code.Interfaces;
 
 namespace Panacea.Interfaces
 {

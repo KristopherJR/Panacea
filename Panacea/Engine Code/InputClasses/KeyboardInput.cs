@@ -1,10 +1,5 @@
-﻿using Panacea.Interfaces;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Input;
+using Panacea.Interfaces;
 
 namespace Panacea.InputClasses
 {
@@ -15,14 +10,14 @@ namespace Panacea.InputClasses
         #region PROPERTIES
         #endregion
         /// <summary>
-        /// gets the current state of the Keyboard and returns it.
+        /// Gets the current state of the Keyboard and returns it.
         /// </summary>
         /// <returns>The current state of the keyboard.</returns>
         public KeyboardState GetCurrentState()
         {
-            // CREATE a new instance of KeyboardState, called newKeyboardState. Assigned it to the current Keyboard state:
+            // CREATE a new instance of KeyboardState, called newState. Assigned it to the current Keyboard state:
             KeyboardState newState = Keyboard.GetState();
-            // RETURN newKeyboardState:
+            // RETURN newState:
             return newState;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
 using Panacea.Game_Code;
 using Panacea.Game_Code.Game_Entities;
 using System.Collections.Generic;
@@ -100,7 +99,7 @@ namespace Panacea
 
             #region LOADING TILESPRITES
             // LOAD the Tile Sprites:
-            for (int i=0; i < NUMBER_OF_TILES; i++)
+            for (int i = 0; i < NUMBER_OF_TILES; i++)
             {
                 ExtractTile(i);
             }
@@ -136,15 +135,27 @@ namespace Panacea
             // STORE the new tempAnimation in the animations Dictionary, using the name provided from the enum:
             animations.Add(animationGroup, tempAnimation);
         }
-
+        /// <summary>
+        /// Gets the Tile image from the tile sheet based on the tileID.
+        /// </summary>
+        /// <param name="tileID">An int representing the ID number of this Tile.</param>
         private static void ExtractTile(int tileID)
         {
+            // DECLARE an int, call it x. Set it to the remainder of tileID by Tile sheet width, * tile width.
             int x = (tileID % TILE_SHEET_WIDTH) * DEFAULT_TILE_WIDTH;
+            // DECLARE an int, call it y. Set it to tileID / tile sheet width * tile width.
             int y = (tileID / TILE_SHEET_WIDTH) * DEFAULT_TILE_WIDTH;
-
+            // LOAD the Tiles Sprite:
             LoadTileSprite(x, y, DEFAULT_TILE_WIDTH, DEFAULT_TILE_HEIGHT, tileID);
         }
-
+        /// <summary>
+        /// Loads a Tiles Sprite and adds it to the total tileSprites List.
+        /// </summary>
+        /// <param name="x">The top-left x coordinate that the image originates from in the image file.</param>
+        /// <param name="y">The top-left y coordinate that the image originates from in the image file.</param>
+        /// <param name="width">The width of the texture in the spritesheet.</param>
+        /// <param name="height">The height of the texture in the spritesheet.</param>
+        /// <param name="tileID">The Tiles ID number.</param>
         private static void LoadTileSprite(int x, int y, int width, int height, int tileID)
         {
             // CREATE a new Sprite, call it tempTileSprite and pass in the parameters:
@@ -157,15 +168,20 @@ namespace Panacea
         /// Returns a specfic entityAnimation from the collective entityAnimation Dictionary. Uses a name from the enum to locate and return a specific entityAnimation.
         /// </summary>
         /// <param name="animationGroup">The entityAnimation enum tags.</param>
-        /// <returns></returns>
+        /// <returns>an Animation from the animation List at the specified index Enum.</returns>
         public static Animation GetAnimation(AnimationGroup animationGroup)
         {
             // RETURN the specific entityAnimation from animations based on the name specificed from the enum:
             return animations[animationGroup];
         }
-
+        /// <summary>
+        /// Returns the image Sprite for a Tile based on the ID number.
+        /// </summary>
+        /// <param name="tileID">The ID Number linked to the Tile image.</param>
+        /// <returns>The TileSprite for the Tile matching the ID number.</returns>
         public static Sprite GetTileSprite(int tileID)
         {
+            // RETURN tileSprites[tileID]:
             return tileSprites[tileID];
         }
     }

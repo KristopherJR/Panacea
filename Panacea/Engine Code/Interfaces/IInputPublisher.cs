@@ -1,11 +1,6 @@
-﻿using Panacea.UserEventArgs;
-using Microsoft.Xna.Framework.Input;
+﻿using Panacea.Engine_Code.UserEventArgs;
+using Panacea.UserEventArgs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Panacea.Engine_Code.UserEventArgs;
 
 namespace Panacea.Interfaces
 {

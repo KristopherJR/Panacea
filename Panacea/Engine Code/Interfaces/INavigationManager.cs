@@ -1,16 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Panacea.Game_Code;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Engine_Code.Interfaces
 {
     public interface INavigationManager
     {
-        TileMap NavigationGrid {get; set; }
+        TileMap NavigationGrid { get; set; } // property
         List<IPathFinder> PathFinders { get; } // read-only property
         /// <summary>
         /// Adds a new IPathFinder to the NavigationManager.

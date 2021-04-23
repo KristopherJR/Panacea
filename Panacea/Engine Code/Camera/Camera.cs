@@ -5,16 +5,12 @@ using Panacea.Engine_Code.Interfaces;
 using Panacea.Engine_Code.UserEventArgs;
 using Panacea.Interfaces;
 using Panacea.UserEventArgs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Engine_Code.Camera
 {
     public class Camera : IUpdatable, IInputListener
     {
+        #region FIELDS
         // DECLARE a Matrix, call it 'transform':
         private Matrix transform;
         // DECLARE a float, call it 'zoomAspect':
@@ -25,6 +21,7 @@ namespace Panacea.Engine_Code.Camera
         private Viewport viewport;
         // DECLARE a GameEntity, call it 'focusedEntity':
         private GameEntity focusedEntity;
+        #endregion
         #region PROPERTIES
         public Matrix Transform
         {
@@ -33,7 +30,7 @@ namespace Panacea.Engine_Code.Camera
         #endregion
 
         /// <summary>
-        /// Camera Constructor
+        /// Camera Constructor.
         /// </summary>
         /// <param name="viewport">A reference to the viewport.</param>
         public Camera(Viewport viewport)
@@ -62,12 +59,23 @@ namespace Panacea.Engine_Code.Camera
         /// <param name="gameTime">A reference to the GameTime.</param>
         public void Update(GameTime gameTime)
         {
+            // SET up the transform via Matrix:
             transform = Matrix.CreateTranslation(-focusedEntity.EntityLocn.X, -focusedEntity.EntityLocn.Y, 0) * // Main Translation Matrix
-                //Matrix.CreateTranslation(-ClampPosition.X + ClampSize.X, -ClampPosition.Y + ClampSize.Y, 0) *
-                Matrix.CreateScale(new Vector3(zoomAspect, zoomAspect, 1)) * // Scale Matrix
-                Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0)); // Origin Offset Matrix
+                        Matrix.CreateScale(new Vector3(zoomAspect, zoomAspect, 1)) * // Scale Matrix using zoomAspect
+                        Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0)); // Origin Offset Matrix
         }
-
+        /// <summary>
+        /// Called whenever a mouse input event is fired from the InputManager.
+        /// </summary>
+        /// <param name="sender">The object firing the event.</param>
+        /// <param name="eventInformation">Information about the event.</param>
+        public void OnNewMouseInput(object sender, OnMouseInputEventArgs eventInformation)
+        {
+            // SET zoomAspect to the scollValue in the eventInformation, * scrollSpeed:
+            zoomAspect += eventInformation.ScrollValue * scrollSpeed;
+            //Console.WriteLine(zoomAspect);
+        }
+        #region _
         public void OnNewInput(object sender, OnInputEventArgs eventInformation)
         {
             // nothing
@@ -78,17 +86,12 @@ namespace Panacea.Engine_Code.Camera
             // nothing
         }
 
-        public void OnNewMouseInput(object sender, OnMouseInputEventArgs eventInformation)
-        {
-            zoomAspect += eventInformation.ScrollValue * scrollSpeed;
-            //Console.WriteLine(zoomAspect);
-        }
-
         public Keys[] getKOI()
         {
             Keys[] fake = new Keys[2];
-            return fake;      
+            return fake;
         }
+        #endregion
         #endregion
     }
 }

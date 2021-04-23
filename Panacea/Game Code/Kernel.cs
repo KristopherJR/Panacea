@@ -1,16 +1,15 @@
-﻿using Panacea.Interfaces;
-using Panacea.Managers;
-using Panacea.UserEventArgs;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
 using Panacea.Engine_Code.Camera;
-using Panacea.Game_Code;
-using Panacea.Game_Code.Game_Entities.Characters;
 using Panacea.Engine_Code.Interfaces;
 using Panacea.Engine_Code.Managers;
+using Panacea.Game_Code;
+using Panacea.Game_Code.Game_Entities.Characters;
+using Panacea.Interfaces;
+using Panacea.Managers;
+using Panacea.UserEventArgs;
+using System;
 
 namespace Panacea
 {
@@ -22,9 +21,11 @@ namespace Panacea
         #region FIELDS
         // DECLARE a public static Boolean, call it 'running':
         public static Boolean running;
-
+        // DECLARE a const String, call it TILE_MAP_FLOOR_PATH. Set it to the File Path of the floor layer: 
         private const String TILE_MAP_FLOOR_PATH = "Content/Janice_Floor Layer.csv";
+        // DECLARE a const String, call it TILE_MAP_COLLISION_PATH. Set it to the File Path of the collision layer:
         private const String TILE_MAP_COLLISION_PATH = "Content/Janice_Collision Layer.csv";
+        // DECLARE a const String, call it TILE_MAP_OBJECTS_PATH. Set it to the File Path of the object layer:
         private const String TILE_MAP_OBJECTS_PATH = "Content/Janice_Object Layer.csv";
 
         // DECLARE a GraphicsDeviceManager, call it 'graphics':
@@ -95,12 +96,14 @@ namespace Panacea
             // INITIALIZE the camera:
             camera = new Camera(GraphicsDevice.Viewport);
             // SUBSCRIBE the camera to listen for input events:
-            iManager.Subscribe(camera, 
+            iManager.Subscribe(camera,
                                camera.OnNewInput,
                                camera.OnKeyReleased,
                                camera.OnNewMouseInput);
 
+            // INITIALISE base class:
             base.Initialize();
+            // SET running to true:
             running = true;
         }
 
@@ -121,15 +124,15 @@ namespace Panacea
             eManager.destroyEntity(eventInformation.EntityUName, eventInformation.EntityUID);
 
             // CREATE a new 'Player' object with the EntityManager:
-            IEntity newBall = eManager.createEntity<Player>();
+            IEntity newPlayer = eManager.createEntity<Player>();
             // SPAWN the entity into the SceneGraph:
-            sManager.spawn(newBall);
+            sManager.spawn(newPlayer);
             // ADD the entity to the CollisionManager:
-            cManager.addCollidable((newBall as ICollidable));
+            cManager.addCollidable((newPlayer as ICollidable));
             // SUBSCIRBE to the termination event that newBall publishes:
-            (newBall as Player).OnEntityTermination += OnEntityTermination;
+            (newPlayer as Player).OnEntityTermination += OnEntityTermination;
         }
-        
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -153,9 +156,9 @@ namespace Panacea
         /// </summary>
         private void SpawnObjects()
         {
-            // REQUEST a new 'Player' object from the EntityManager, and pass it to the SceneManager:
+            // REQUEST a new 'Player' object from the EntityManager, and pass it to the SceneManager. Call it Sam.:
             IEntity sam = eManager.createEntity<Player>();
-            // REQUEST a new 'Mary' object from the EntityManager, and pass it to the SceneManager:
+            // REQUEST a new 'NPC' object from the EntityManager, and pass it to the SceneManager. Call it Mary.:
             IEntity mary = eManager.createEntity<NPC>();
             // SPAWN sam into the SceneGraph:
             sManager.spawn(sam);
@@ -164,15 +167,15 @@ namespace Panacea
 
             // ADD IENTITY TILES TO SCENEGRAPH HERE
 
+            // FOREACH Tile in TileMap collision Layer:
             foreach (Tile t in tileMapCollisions.GetTileMap())
             {
+                // SPAWN the Tiles into the SceneGraph:
                 sManager.spawn(t);
             }
 
-
             // SET camera focus onto Player:
             camera.SetFocus(sam as GameEntity);
-            
 
             // ITERATE through the SceneGraph:
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
@@ -211,11 +214,9 @@ namespace Panacea
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             // TODO: Add your drawing code here
             spriteBatch.Begin(samplerState: SamplerState.PointClamp,
                               transformMatrix: camera.Transform);
-
             // DRAW the TileMaps:
             tileMapFloor.DrawTileMap(spriteBatch);
             tileMapCollisions.DrawTileMap(spriteBatch);
@@ -224,17 +225,15 @@ namespace Panacea
             for (int i = 0; i < sManager.SceneGraph.Count; i++)
             {
                 // STOP this loop from drawing the TileMap, as tiles are in the SceneGraph but have their own unique draw method in TileMap:
-                if(sManager.SceneGraph[i] is Tile)
+                if (sManager.SceneGraph[i] is Tile)
                 {
                     // IF it's a Tile, break the loop:
                     break;
                 }
                 // IF not, draw the GameEntity to the SpriteBatch:
-                (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch); 
+                (sManager.SceneGraph[i] as GameEntity).Draw(spriteBatch);
             }
-
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
@@ -258,10 +257,10 @@ namespace Panacea
                 sManager.Update(gameTime);
                 // UPDATE the InputManager:
                 iManager.update();
-                
+
                 // UPDATE the Camera:
                 camera.Update(gameTime);
-
+                // UPDATE base class:
                 base.Update(gameTime);
             }
         }

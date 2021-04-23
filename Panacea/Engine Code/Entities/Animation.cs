@@ -1,14 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Panacea.Engine_Code.Interfaces;
 using Panacea.Game_Code.Game_Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Game_Code
 {
-    public class Animation
+    public class Animation : IUpdatable
     {
         #region FIELDS
         // DECLARE a List of Sprites, call it animationFrames:
@@ -24,7 +22,6 @@ namespace Panacea.Game_Code
         #endregion
 
         #region PROPERTIES
-
         public List<Sprite> AnimationFrames // read-only property
         {
             get { return animationFrames; }
@@ -76,19 +73,30 @@ namespace Panacea.Game_Code
             timer = 0;
 
         }
-        public void AddFrame(Sprite sprite)
+        /// <summary>
+        /// Adds an animation to the Animation.
+        /// </summary>
+        /// <param name="frame">A Sprite containing the image of the new animation frame.</param>
+        public void AddFrame(Sprite frame)
         {
-            animationFrames.Add(sprite);
+            // ADD the new frame to the animationFrames:
+            animationFrames.Add(frame);
         }
+
+        #region IMPLEMENTATION OF IUpdatable
+        /// <summary>
+        /// Default Update loop for Animation.
+        /// </summary>
+        /// <param name="gameTime">A reference to the GameTime.</param>
         public void Update(GameTime gameTime)
         {
             // IF the program is running:
-            if(isPlaying)
+            if (isPlaying)
             {
                 // ADD the time elapsed in milliseconds to the timer:
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 // IF the timer is greater than 1 / frameRate*1000:
-                if(timer > 1/frameRate*1000)
+                if (timer > 1 / frameRate * 1000)
                 {
                     // SET the current frame to the next frame using the remainder:
                     frameCounter = (frameCounter + 1) % animationFrames.Count;
@@ -96,7 +104,7 @@ namespace Panacea.Game_Code
                     timer = 0;
                 }
             }
-
         }
+        #endregion
     }
 }

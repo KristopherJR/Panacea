@@ -1,11 +1,6 @@
 ﻿using Panacea.Interfaces;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Managers
 {
@@ -86,7 +81,7 @@ namespace Panacea.Managers
             if (e is Player)
             {
                 // STEP-THROUGH the 'entityPool' List for each 'Player':
-                for(int i=0;i<entityPool.Count;i++)
+                for (int i = 0; i < entityPool.Count; i++)
                 {
                     if (entityPool[i] is Player)
                     {
@@ -95,9 +90,9 @@ namespace Panacea.Managers
                     }
                 }
                 // STEP-THROUGH the 'entityPool' List again for each 'Player':
-                for(int i= 0; i < entityPool.Count; i++)
+                for (int i = 0; i < entityPool.Count; i++)
                 {
-                    if(entityPool[i] is Player)
+                    if (entityPool[i] is Player)
                     {
                         // CHECK that the name isn't already being used:
                         if (entityPool[i].UName == ("Player" + tempCounter))
@@ -105,7 +100,7 @@ namespace Panacea.Managers
                             // IF the name is being used, increase the counter again:
                             tempCounter++;
                         }
-                    }  
+                    }
                 }
                 // SET the entityPool name to "Player" plus the 'tempCounter':
                 e.UName = ("Player" + tempCounter);

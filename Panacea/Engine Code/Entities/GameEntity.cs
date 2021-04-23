@@ -1,8 +1,8 @@
-﻿using System;
-using Panacea.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Panacea.Game_Code.Game_Entities;
+using Panacea.Interfaces;
+using System;
 
 namespace Panacea
 {
@@ -47,7 +47,7 @@ namespace Panacea
         public GameEntity()
         {
             // INITALIZE entityLocn to default 0,0:
-            this.entityLocn = new Vector2(0,0);
+            this.entityLocn = new Vector2(0, 0);
             // SET isCollidable to false as default:
             this.isCollidable = false;
             // SET isCharacter to false as default:
@@ -84,15 +84,21 @@ namespace Panacea
             }
         }
 
+        /// <summary>
+        /// Calculates an appropriately sized HitBox for the GameEntity. If the GameEntity is a "character", their hitbox will be different
+        /// to other objects. This is to allow proper collision, since characters should have a HitBox slightly smaller than their graphical
+        /// representation so they do not get stuck on walls and other objects.
+        /// </summary>
+        /// <returns>A Rectangle representing the GameEntity's new HitBox.</returns>
         private Rectangle GetHitBox()
         {
             // DECLARE a Rectangle, call it 'newHitBox':
             Rectangle newHitBox;
             // IF the GameEntity is a Character:
-            if(isCharacter == true)
+            if (isCharacter == true)
             {
                 // CALCULATE an appropriate HitBox, I.E one that is slightly smaller than the entity texture:
-                newHitBox = new Rectangle((int)(this.EntityLocn.X + (this.EntitySprite.TextureWidth * 0.15)), 
+                newHitBox = new Rectangle((int)(this.EntityLocn.X + (this.EntitySprite.TextureWidth * 0.15)),
                                           (int)(this.EntityLocn.Y + (this.EntitySprite.TextureHeight * 0.4)),
                                           (int)(this.EntitySprite.TextureWidth * 0.70),
                                           (int)(this.EntitySprite.TextureHeight * 0.60));

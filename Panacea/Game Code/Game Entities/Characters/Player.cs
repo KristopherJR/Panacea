@@ -39,7 +39,7 @@ namespace Panacea
         public Player() : base(GameContent.GetAnimation(AnimationGroup.SamWalkDown))
         {
             // SET Sams location in the world:
-            this.EntityLocn = new Vector2(100,100);
+            this.EntityLocn = new Vector2(100, 100);
             // INITIALIZE moveSpeed to '1.5f':
             this.moveSpeed = 1.5f;
             // SET isSprintEnabled to false as default:
@@ -71,14 +71,14 @@ namespace Panacea
         /// <param name="collidee">The object that this object collided into.</param>
         public void CheckAndRespond(ICollidable collidee)
         {
-            if(GameEntity.hasCollided(this,collidee))
+            if (GameEntity.hasCollided(this, collidee))
             {
                 entityLocn = lastPosition;
             }
         }
         #endregion
         #region IMPLEMENTATION OF IInputListener
-        
+
         /// <summary>
         /// Event Handler for the event OnNewInput, fired from the InputManager. This will be triggered when a new input occurs. Method from Marc Price, Week 18 Input slides on BlackBoard.
         /// </summary>
@@ -91,9 +91,9 @@ namespace Panacea
             {
                 case Keys.W:
                     // MOVE player UP by movespeed:
-                    this.EntityVelocity = new Vector2(0,-moveSpeed);
+                    this.EntityVelocity = new Vector2(0, -moveSpeed);
                     // IF the player is sprinting:
-                    if(isSprintEnabled)
+                    if (isSprintEnabled)
                     {
                         // SET Sams animation to sprint UP:
                         this.entityAnimation = GameContent.GetAnimation(AnimationGroup.SamSprintUp);
@@ -143,7 +143,7 @@ namespace Panacea
                     break;
                 case Keys.LeftShift:
                     // IF sprint is off, the user is trying to turn it on. Only turn it off once they let go of shift:
-                    if(isSprintEnabled == false && isSprintReleased == true)
+                    if (isSprintEnabled == false && isSprintReleased == true)
                     {
                         // INCREASE Sams speed by 50%:
                         this.moveSpeed *= 1.5f;
@@ -179,19 +179,19 @@ namespace Panacea
             {
                 case Keys.W:
                     // STOP the players movement:
-                    this.EntityVelocity = new Vector2(0,0);
+                    this.EntityVelocity = new Vector2(0, 0);
                     break;
                 case Keys.A:
                     // STOP the players movement:
-                    this.EntityVelocity = new Vector2(0,0);
+                    this.EntityVelocity = new Vector2(0, 0);
                     break;
                 case Keys.S:
                     // STOP the players movement:
-                    this.EntityVelocity = new Vector2(0,0);
+                    this.EntityVelocity = new Vector2(0, 0);
                     break;
                 case Keys.D:
                     // STOP the players movement:
-                    this.EntityVelocity = new Vector2(0,0);
+                    this.EntityVelocity = new Vector2(0, 0);
                     break;
                 case Keys.LeftShift:
                     // FLAG the player has released sprint key:

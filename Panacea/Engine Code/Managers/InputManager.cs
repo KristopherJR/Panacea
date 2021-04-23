@@ -15,26 +15,20 @@ namespace Panacea.Managers
         public event EventHandler<OnInputEventArgs> NewInput;
         // DECLARE a new event that signifies a Key has been released:
         public event EventHandler<OnKeyReleasedEventArgs> KeyReleased;
-
         // DECLARE a new event that signifies a Mouse input has occured:
         public event EventHandler<OnMouseInputEventArgs> NewMouseInput;
-
         // DECLARE a reference to IInput, call it input:
         private IInput input;
-
         // DECLARE a List of IInputListener, call it subscribers:
         private List<IInputListener> subscribers;
-
         // DECLARE a KeyboardState, call it newKeyboardState:
         private KeyboardState newKeyboardState;
         // DECLARE a KeyboardState, call it oldKeyboardState:
         private KeyboardState oldKeyboardState;
-
         // DECLARE a MouseState, call it newMouseState:
         private MouseState newMouseState;
         // DECLARE a Mouse, call it oldMouseState:
         private MouseState oldMouseState;
-
         // DECLARE an int, call it lastScrollState:
         private int lastScrollState;
         #endregion
@@ -62,14 +56,14 @@ namespace Panacea.Managers
         {
             // GET the current Mouse State:
             newMouseState = ((input as Input).MouseInput).GetCurrentState();
-            
+
             foreach (IInputListener sub in subscribers)
             {
                 // IF there are subscribers to mouse input events:
-                if(NewMouseInput != null)
+                if (NewMouseInput != null)
                 {
                     // IF the mouse button has been pressed and the current mouse state is different to the previous:
-                    if(newMouseState.LeftButton == ButtonState.Pressed && newMouseState.LeftButton != oldMouseState.LeftButton)
+                    if (newMouseState.LeftButton == ButtonState.Pressed && newMouseState.LeftButton != oldMouseState.LeftButton)
                     {
                         // FIRE the event passing in the mouse state:
                         this.OnNewMouseInput(newMouseState, 0);
@@ -84,16 +78,17 @@ namespace Panacea.Managers
                     }
                     // USER has scrolled down:
                     if (newMouseState.ScrollWheelValue < lastScrollState)
-                    {          
+                    {
+                        // FIRE the event passing in the mouse state:
                         this.OnNewMouseInput(newMouseState, -1);
+                        // STORE the previous scroll wheel state:
                         lastScrollState = newMouseState.ScrollWheelValue;
                     }
-                    
+
                 }
             }
             // STORE the current state as oldMouseState:
             oldMouseState = newMouseState;
-
         }
 
         /// <summary>

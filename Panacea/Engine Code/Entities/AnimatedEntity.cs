@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Game_Code.Game_Entities
 {
@@ -13,6 +8,9 @@ namespace Panacea.Game_Code.Game_Entities
         #region FIELDS
         // DECLARE an instance of Animation, call it entityAnimation:
         protected Animation entityAnimation;
+        #endregion
+
+        #region PROPERTIES
         #endregion
 
         /// <summary>

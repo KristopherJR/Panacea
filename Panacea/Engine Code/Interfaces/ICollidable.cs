@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Panacea.Interfaces
+﻿namespace Panacea.Interfaces
 {
     public interface ICollidable
     {
+        /// <summary>
+        /// A Property to determine if the object can be collided with.
+        /// </summary>
         bool IsCollidable { get; set; }
     }
 }

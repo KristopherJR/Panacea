@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.UserEventArgs
 {
@@ -39,6 +35,6 @@ namespace Panacea.UserEventArgs
             entityUName = eName;
             // SET 'entityUID' to the provided int:
             entityUID = eID;
-        }   
+        }
     }
 }

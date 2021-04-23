@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.UserEventArgs
 {
@@ -19,7 +15,7 @@ namespace Panacea.UserEventArgs
         {
             get { return _keyInput; } // get method
         }
-        
+
         #endregion
 
         /// <summary>
@@ -29,7 +25,7 @@ namespace Panacea.UserEventArgs
         public OnInputEventArgs(Keys keyInput)
         {
             // SET the incoming parameter to the _keyInput:
-           _keyInput = keyInput;
+            _keyInput = keyInput;
         }
     }
 }

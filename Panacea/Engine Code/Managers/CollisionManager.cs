@@ -1,11 +1,7 @@
 ﻿using Panacea.Interfaces;
-using Panacea.Managers;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.Managers
 {
@@ -28,6 +24,7 @@ namespace Panacea.Managers
         {
             // INITALISE 'collidables':
             collidables = new List<ICollidable>();
+            // INITALISE 'collisionGraph':
             collisionGraph = new List<ICollisionResponder>();
         }
 
@@ -38,17 +35,17 @@ namespace Panacea.Managers
         public void PopulateCollidables(List<IEntity> sceneGraphCopy)
         {
             // ITERATE through the sceneGraphCopy:
-            foreach(ICollidable c in sceneGraphCopy)
+            foreach (ICollidable c in sceneGraphCopy)
             {
-                if(c.IsCollidable)
+                if (c.IsCollidable)
                 {
                     // ADD each ICollidable in sceneGraphCopy to collidables:
-                    collidables.Add(c); 
+                    collidables.Add(c);
                 }
             }
-            foreach(IEntity c in sceneGraphCopy)
+            foreach (IEntity c in sceneGraphCopy)
             {
-                if(c is ICollisionResponder)
+                if (c is ICollisionResponder)
                 {
                     collisionGraph.Add(c as ICollisionResponder);
                 }
@@ -93,11 +90,11 @@ namespace Panacea.Managers
         public void CheckEntityCollisions()
         {
             // CHECK for collisions in pairs:
-            for(int i=0; i < collidables.Count; i++)
+            for (int i = 0; i < collidables.Count; i++)
             {
                 for (int j = 0; j < collisionGraph.Count; j++)
-                { 
-                    if(collisionGraph[j] != collidables[i])
+                {
+                    if (collisionGraph[j] != collidables[i])
                     {
                         // CALL CollisionResponse to check if 'i' collided with 'j'. If they did, respond appropriately:
                         collisionGraph[j].CheckAndRespond(collidables[i]);

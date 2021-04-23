@@ -6,8 +6,9 @@ namespace Panacea.Engine_Code.UserEventArgs
     public class OnMouseInputEventArgs : EventArgs
     {
         #region FIELDS
-        // DECLARE an instance of ButtonState called _mouseButtonInput to store the mouse button that was just pressed by a user:
+        // DECLARE an instance of MouseState called _mouseState:
         private MouseState _mouseState;
+        // DECLARE an int, call it _scrollValue:
         private int _scrollValue;
         #endregion
 
@@ -26,7 +27,8 @@ namespace Panacea.Engine_Code.UserEventArgs
         /// <summary>
         /// Constructor for objects of class OnMouseInputEventArgs.
         /// </summary>
-        /// <param name="mouseButtonInput">The Mouse Button that was just pressed.</param>
+        /// <param name="mouseState">The current MouseState.</param>
+        /// <param name="scrollValue">The scroll wheel value.</param>
         public OnMouseInputEventArgs(MouseState mouseState, int scrollValue)
         {
             // STORE incoming parameters:

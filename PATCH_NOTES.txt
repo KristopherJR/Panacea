@@ -1,15 +1,22 @@
-VERSION: 0.62, 22-04-2021
+VERSION: 0.7, 23-04-2021
 
 AUTHORS: Kristopher John Randle
 
-
+Final Version that will be submitted for COMP2451 Final Milestone.
 
 PATCH SUMMARY:
 
-Made the NPCs wait 5 seconds before pathing to a new tile.
+Program Features:
+1.	Basic player movement. Walking with the W, A, S, D keys.
+2.	Animated Sprites.
+3.	Spawning a world with a TileMap, with separate collidable and non-collidable layers.
+4.	Entities colliding with walls and other entities/objects.
+5.	A camera that can track the player, with zoom functionality. (Mouse input)
+6.	A Sprint Mechanic (With a changing animation).
+7.	Roaming NPCs (Mary Herbert)
+
 
 https://github.com/KristopherJR/Panacea
 
-PATCH NOTES:
 
 

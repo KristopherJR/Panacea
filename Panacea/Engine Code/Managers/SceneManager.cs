@@ -1,8 +1,7 @@
-﻿using Panacea.Interfaces;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
 using Panacea.Engine_Code.Interfaces;
+using Panacea.Interfaces;
+using System.Collections.Generic;
 
 namespace Panacea.Managers
 {
@@ -11,7 +10,6 @@ namespace Panacea.Managers
         #region FIELDS
         // DECLARE a new 'List' storing 'IEntity' objects, call it 'sceneGraph':
         private List<IEntity> sceneGraph;
-        
         #endregion
 
         #region PROPERTIES
@@ -68,13 +66,12 @@ namespace Panacea.Managers
         /// METHOD: Calls the Update method of each entity in the sceneGraph to make them move.
         /// </summary>
         private void moveEntities(GameTime gameTime)
-        {  
+        {
             // ITERATE through the 'sceneGraphCopy':
             foreach (IEntity entity in sceneGraph)
             {
-                // MOVE the ball by it's X and Y speed:
+                // CALL the entity's Update method and pass in GameTime:
                 entity.Update(gameTime);
-                
             }
         }
         #endregion

@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Panacea.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea
 {
@@ -30,10 +25,10 @@ namespace Panacea
         }
         #endregion
 
-        public Entity()
-        {
-            // do nothing
-        }
+        /// <summary>
+        /// Default Update loop of Entity.
+        /// </summary>
+        /// <param name="gameTime">A reference to the GameTime.</param>
         public virtual void Update(GameTime gameTime)
         {
             // do nothing

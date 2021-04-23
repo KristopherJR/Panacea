@@ -1,20 +1,19 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using Panacea.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panacea.InputClasses
 {
     class MouseInput : IMouseInput
     {
+        /// <summary>
+        /// Gets the current state of the Mouse and returns it.
+        /// </summary>
+        /// <returns>The current state of the mouse.</returns>
         public MouseState GetCurrentState()
         {
-            // CREATE a new instance of MouseState, called newKeyboardState. Assigned it to the current mouse state:
+            // CREATE a new instance of MouseState, called newState. Assigned it to the current mouse state:
             MouseState newState = Mouse.GetState();
-            // RETURN newKeyboardState:
+            // RETURN newState:
             return newState;
         }
     }
